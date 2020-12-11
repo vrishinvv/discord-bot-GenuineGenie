@@ -12,6 +12,8 @@ module.exports = {
 **${prefix} create-tc <tc_name>** - creates a text channel
 **${prefix} give-role <user's@> <role>** - gives a role to a user
 **${prefix} remove-role <user's@> <role>** - removes a role from a user
+**${prefix} ban <user's@> <role>** - bans a user
+**${prefix} kick <user's@> <role>** - kicks a user
 **${prefix} server-info** - displays server info`
         );
     },
