@@ -4,8 +4,8 @@ module.exports = {
     permissionError: '',
     minArgs: 2,
     maxArgs: 2,
-    callback: (client, message, arguments, text) => {
-        const targetUser = mesage.mentions.users.first();
+    callback: (message, arguments, text) => {
+        const targetUser = message.mentions.users.first();
         if (!targetUser) {
             message.reply('Please specify a proper user @');
             return;
@@ -29,9 +29,9 @@ module.exports = {
 
         if (member.roles.cache.get(role.id)) {
             member.roles.remove(role);
-            message.reply(`${targetUser} no longer has the role ${roleName} `);
+            message.channel.send(`${targetUser} no longer has the role ${roleName} `);
         } else {
-            message.reply(`${targetUser} does not have the role ${roleName} `);
+            message.channel.send(`${targetUser} does not have the role ${roleName} `);
         }
     },
     permissions: ['ADMINISTRATOR'],

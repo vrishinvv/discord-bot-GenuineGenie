@@ -4,8 +4,8 @@ module.exports = {
     permissionError: '',
     minArgs: 2,
     maxArgs: 2,
-    callback: (client, message, arguments, text) => {
-        const targetUser = mesage.mentions.users.first();
+    callback: (message, arguments, text) => {
+        const targetUser = message.mentions.users.first();
         if (!targetUser) {
             message.reply('Please specify a proper user @');
             return;
@@ -28,9 +28,9 @@ module.exports = {
         const member = guild.members.cache.get(targetUser.id);
 
         // Give the role
-        member.roles.add(roleMame);
+        member.roles.add(role);
 
-        message.reply(`${targetUser} now has the role ${roleName} `);
+        message.channel.send(`<@${targetUser.id}> now has the role ${roleName} `);
     },
     permissions: ['ADMINISTRATOR'],
     requiredRoles: [],

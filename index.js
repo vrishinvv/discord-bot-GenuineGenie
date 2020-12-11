@@ -5,8 +5,10 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 const config = require('./config.json');
-const firstMessage = require('./first-message.js');
 const roleClaim = require('./role-claim.js');
+const welcome = require('./welcome.js');
+
+client.setMaxListeners(100);
 
 console.log('Starting up Discord Client...');
 client.on('ready', () => {
@@ -40,6 +42,9 @@ client.on('ready', () => {
 
     // initialising the role-claim chanel
     roleClaim(client);
+
+    //setting up welome
+    welcome(client);
 });
 
 client.login(config.token);
