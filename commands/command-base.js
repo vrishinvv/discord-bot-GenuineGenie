@@ -170,7 +170,7 @@ module.exports = (client, commandOptions) => {
                 }
 
                 // Handle the custom command code
-                callback(message, arguments, arguments.join(' '));
+                callback(message, arguments, arguments.join(' '), client);
 
                 // commands issued ++
                 //incCommandsIssued(dbclient, message, arguments, arguments.join(' '));
