@@ -1,9 +1,12 @@
 const path = require('path');
 const fs = require('fs');
-const config = require('./config.json');
-const Discord = require('discord.js');
 
+const Discord = require('discord.js');
 const client = new Discord.Client();
+
+const config = require('./config.json');
+const firstMessage = require('./first-message.js');
+const roleClaim = require('./role-claim.js');
 
 console.log('Starting up Discord Client...');
 client.on('ready', () => {
@@ -13,6 +16,7 @@ client.on('ready', () => {
     const baseFile = 'command-base.js';
     const commandBase = require(`./commands/${baseFile}`);
 
+    // Registering all the commands
     const readCommands = (dir) => {
         const files = fs.readdirSync(path.join(__dirname, dir));
         for (const file of files) {
@@ -27,11 +31,15 @@ client.on('ready', () => {
     };
     readCommands('commands');
 
+    // Setting bot's status
     client.user.setPresence({
         activity: {
             name: `"${config.prefix} help" for help`,
         },
     });
+
+    // initialising the role-claim chanel
+    roleClaim(client);
 });
 
 client.login(config.token);

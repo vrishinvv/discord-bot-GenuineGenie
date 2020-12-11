@@ -17,7 +17,7 @@ module.exports = {
         // Ensure that the role exists
         const roleName = arguments.join(' ');
         const { guild } = message;
-        const role = guild.role.cache.find((role) => {
+        const role = guild.roles.cache.find((role) => {
             return role.name === roleName;
         });
         if (!role) {
