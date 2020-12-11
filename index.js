@@ -6,15 +6,24 @@ const client = new Discord.Client();
 
 const config = require('./config.json');
 const roleClaim = require('./role-claim/role-claim.js');
-const welcome = require('./welcome-message/welcome.js');
-
+const welcome = require('./welcome-message/welcome1.js');
+const memberCount = require('./member-count.js');
+const messageCounter = require('./message-counter.js');
+const mongo = require('./mongo');
 client.setMaxListeners(100);
 
 console.log('Starting up Discord Client...');
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log('Estabished connection with Discord...');
     console.log(`Logged in as ${client.user.tag}!\n`);
 
+    await mongo().then((mongoose) => {
+        try {
+            console.log('Estabished connection with MongoDB...');
+        } finally {
+            mongoose.connection.close();
+        }
+    });
     const baseFile = 'command-base.js';
     const commandBase = require(`./commands/${baseFile}`);
 
@@ -45,6 +54,12 @@ client.on('ready', () => {
 
     //setting up welome
     welcome(client);
+
+    //Member Count channel
+    memberCount(client);
+
+    //Message Counter
+    messageCounter(client);
 });
 
 client.login(config.token);

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/vrishinvv/discord-bot-GenuienGenie#readme",
   "dependencies": {
-    "discord.js": "^12.5.1"
+    "discord.js": "^12.5.1",
+    "mongoose": "^5.11.7"
   }
 }

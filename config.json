@@ -1,4 +1,5 @@
 {
     "prefix": "hit",
-    "token": "Nzg2MjMwOTg3OTY0ODA5MjU3.X9DYqg.CA6MwsLvHX_mNzbGi_ftapEjLZI"
+    "token": "Nzg2MjMwOTg3OTY0ODA5MjU3.X9DYqg.CA6MwsLvHX_mNzbGi_ftapEjLZI",
+    "mongoURL": "mongodb+srv://drpg:LZfVn5JZorZVj4As@discord-bot.ynyjy.mongodb.net/test"
 }
