@@ -1,13 +1,13 @@
 module.exports = {
     commands: ['give-role'],
     expectedArgs: "<user's @> <role_name>",
-    permissionError: '',
     minArgs: 2,
     maxArgs: 2,
     callback: (message, arguments, text) => {
+        console.log('im in');
         const targetUser = message.mentions.users.first();
         if (!targetUser) {
-            message.reply('Please specify a proper user @');
+            message.reply('1Please specify a proper user @');
             return;
         }
 
@@ -21,7 +21,7 @@ module.exports = {
             return role.name === roleName;
         });
         if (!role) {
-            message.reply(`There is no role "${roleName}"`);
+            message.reply(`11There is no role "${roleName}"`);
         }
 
         // Member object has more information than the User object
@@ -30,7 +30,7 @@ module.exports = {
         // Give the role
         member.roles.add(role);
 
-        message.channel.send(`<@${targetUser.id}> now has the role ${roleName} `);
+        message.channel.send(`111<@${targetUser.id}> now has the role ${roleName}`);
     },
     permissions: ['ADMINISTRATOR'],
     requiredRoles: [],

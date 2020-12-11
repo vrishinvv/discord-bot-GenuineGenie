@@ -5,8 +5,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 const config = require('./config.json');
-const roleClaim = require('./role-claim.js');
-const welcome = require('./welcome.js');
+const roleClaim = require('./role-claim/role-claim.js');
+const welcome = require('./welcome-message/welcome.js');
 
 client.setMaxListeners(100);
 
