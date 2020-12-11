@@ -5,10 +5,10 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 const config = require('./config.json');
-const roleClaim = require('./role-claim/role-claim.js');
-const welcome = require('./welcome-message/welcome1.js');
-const memberCount = require('./member-count.js');
-const messageCounter = require('./message-counter.js');
+const roleClaim = require('./global-listeners/role-claim/role-claim.js');
+const welcome = require('./global-listeners/welcome-message/welcome1.js');
+const memberCount = require('./global-listeners/memeber-count/member-count.js');
+const messageCounter = require('./global-listeners/message-counter/message-counter.js');
 const mongo = require('./mongo');
 client.setMaxListeners(100);
 
