@@ -3,6 +3,7 @@ const getUser = require('../../helper-snips/getUser');
 
 module.exports = {
     commands: ['with', 'wit', 'withdraw'],
+    description: 'withdraws coins into from vault',
     expectedArgs: '<coins> -or- <max>',
     minArgs: 1,
     maxArgs: 1,

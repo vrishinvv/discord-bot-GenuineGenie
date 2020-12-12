@@ -1,6 +1,7 @@
 module.exports = {
     commands: ['create-vc'],
     expectedArgs: '<vc_name>',
+    description: 'creates a voice channel',
     minArgs: 1,
     maxArgs: null,
     callback: (message, arguments, text) => {

@@ -8,6 +8,7 @@ const updatetUser = require('../../helper-snips/updateUser');
 
 module.exports = {
     commands: ['explore', 'exp'],
+    description: 'explores the wilderness ',
     minArgs: 0,
     maxArgs: 0,
     cooldown: 12,

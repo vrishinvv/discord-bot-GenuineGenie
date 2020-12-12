@@ -1,6 +1,7 @@
 module.exports = {
     commands: ['create-tc'],
     expectedArgs: '<tc_name>',
+    description: 'creates a text channel',
     minArgs: 1,
     maxArgs: null,
     callback: (message, arguments, text) => {

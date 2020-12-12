@@ -3,6 +3,7 @@ const getUser = require('../../helper-snips/getUser');
 
 module.exports = {
     commands: ['gamble'],
+    description: '50% chance of winning or losing the cash you bet',
     expectedArgs: '<coins>',
     minArgs: 1,
     maxArgs: 1,

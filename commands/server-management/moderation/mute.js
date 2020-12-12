@@ -2,6 +2,7 @@ const redis = require('../../../redis');
 
 module.exports = {
     commands: ['mute'],
+    description: 'mutes the user for the given time',
     expectedArgs: "<user's @> <duration> <s/m/h/d>",
     minArgs: 3,
     maxArgs: 3,

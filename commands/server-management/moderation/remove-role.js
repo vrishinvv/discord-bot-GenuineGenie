@@ -1,6 +1,7 @@
 module.exports = {
     commands: ['remove-role'],
     expectedArgs: "<user's @> <role_name>",
+    description: "remove role of user",
     minArgs: 2,
     maxArgs: 2,
     callback: (message, arguments, text) => {

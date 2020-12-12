@@ -1,6 +1,7 @@
 module.exports = {
     commands: ['give-role'],
     expectedArgs: "<user's @> <role_name>",
+    description: 'gives role to user',
     minArgs: 2,
     maxArgs: 2,
     callback: (message, arguments, text) => {

@@ -3,6 +3,7 @@ const getUser = require('../../helper-snips/getUser');
 
 module.exports = {
     commands: ['bal', 'balance'],
+    description: "shows yours'/user's balance",
     expectedArgs: "<user's @>",
     permissionError: '',
     maxArgs: 1,

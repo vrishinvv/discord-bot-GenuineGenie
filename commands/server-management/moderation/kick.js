@@ -1,5 +1,6 @@
 module.exports = {
     commands: ['kick'],
+    description: 'kicks the user from the server',
     expectedArgs: "<user's @>",
     minArgs: 1,
     maxArgs: 1,

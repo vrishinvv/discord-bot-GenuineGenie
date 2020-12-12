@@ -1,20 +1,41 @@
 const Discord = require('discord.js');
+const loadCommands = require('./load-commands');
 const { prefix } = require('../config.json');
+
 module.exports = {
     commands: ['help'],
-    minArgs: 0,
-    maxArgs: 0,
+    description: 'describes differnt commands',
     callback: (message, arguments, text) => {
-        message.channel.send(
-            `**${prefix} ping** - replies with pong
-**${prefix} add <num1> <num2>** - adds 2 numbers
-**${prefix} create-vc <vc_name>** - creates a voice channel
-**${prefix} create-tc <tc_name>** - creates a text channel
-**${prefix} give-role <user's@> <role>** - gives a role to a user
-**${prefix} remove-role <user's@> <role>** - removes a role from a user
-**${prefix} ban <user's@> <role>** - bans a user
-**${prefix} kick <user's@> <role>** - kicks a user
-**${prefix} server-info** - displays server info`
-        );
+        let reply = 'I am the **GenuinGenie**-bot. I can pretty much do anything: \n\n';
+        const commands = loadCommands();
+
+        for (const command of commands) {
+            let permissions = command.permission;
+            if (permissions) {
+                let hasPermission = true;
+                if (typeof permissions === 'string') {
+                    permissions = [permissions];
+                }
+
+                for (const permission of permissions) {
+                    if (!message.author.hasPermission(permission)) {
+                        hasPermission = false;
+                        break;
+                    }
+                }
+
+                if (!hasPermission) {
+                    continue;
+                }
+            }
+
+            // Format the text
+            const mainCommand = typeof command.commands === 'string' ? command.commands : command.commands[0];
+            const args = command.expectedArgs ? ` ${command.expectedArgs}` : ``;
+            const { description } = command;
+
+            reply += `**${prefix} ${mainCommand}${args}** = ${description}\n`;
+        }
+        message.channel.send(reply);
     },
 };

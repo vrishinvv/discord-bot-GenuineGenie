@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = {
     commands: ['invites'],
+    description: 'checks invites leaderboard',
     callback: async (message, arguments, text) => {
         const { guild } = message;
         const inviteCounter = {};

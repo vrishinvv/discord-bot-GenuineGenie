@@ -4,6 +4,7 @@ const getUser = require('../../helper-snips/getUser');
 module.exports = {
     commands: ['dep', 'deposit'],
     expectedArgs: '<coins> -or- <max>',
+    description: 'deposits coins into your vault',
     minArgs: 1,
     maxArgs: 1,
     //cooldown: 3,

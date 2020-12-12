@@ -1,5 +1,6 @@
 module.exports = {
     commands: ['ban'],
+    description: 'bans the user from the server',
     expectedArgs: "<user's @>",
     minArgs: 1,
     maxArgs: 1,
