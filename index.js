@@ -7,7 +7,7 @@ const roleClaim = require('./global-listeners/role-claim/role-claim.js');
 const welcome = require('./global-listeners/welcome-message/welcome1.js');
 const memberCount = require('./global-listeners/memeber-count/member-count.js');
 const messageCounter = require('./global-listeners/message-counter/message-counter.js');
-const economy = require('./global-listeners/economy/economy.js');
+const advacnedPolls = require('./advanced-polls.js');
 const mongo = require('./mongo');
 const loadCommands = require('./commands/load-commands');
 
@@ -45,6 +45,9 @@ client.on('ready', async () => {
 
     //Message Counter
     messageCounter(client);
+
+    //advanced Polls
+    advacnedPolls(client);
 });
 
 client.login(config.token);
