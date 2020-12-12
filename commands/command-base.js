@@ -1,5 +1,5 @@
 const { prefix } = require('../config.json');
-
+const updateXP = require('../helper-snips/updateXP');
 const validatePermissions = (permissions) => {
     const validPermissions = [
         'CREATE_INSTANT_INVITE',
@@ -92,7 +92,7 @@ module.exports = (client, commandOptions) => {
         validatePermissions(permissions);
     }
 
-    client.on('message', (message) => {
+    client.on('message', async (message) => {
         const { member, content, guild } = message;
 
         const currentDate = new Date();
@@ -173,7 +173,7 @@ module.exports = (client, commandOptions) => {
                 callback(message, arguments, arguments.join(' '), client);
 
                 // commands issued ++
-                //incCommandsIssued(dbclient, message, arguments, arguments.join(' '));
+                await updateXP(message.author.id, Math.floor(Math.random() * 50) + 50, message);
 
                 return;
             }

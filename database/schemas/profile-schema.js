@@ -23,7 +23,18 @@ const profileSchema = mongoose.Schema({
     vault_size: reqNumber,
     hunting_bow: reqBoolean,
     fishing_rod: reqBoolean,
-    commands_issued: reqNumber,
+    commands_issued: {
+        type: Number,
+        default: 0,
+    },
+    xp: {
+        type: Number,
+        default: 0,
+    },
+    level: {
+        type: Number,
+        default: 1,
+    },
 });
 
 module.exports = mongoose.model('profiles', profileSchema);

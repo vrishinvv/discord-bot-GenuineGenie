@@ -6,7 +6,7 @@ const config = require('./config.json');
 const roleClaim = require('./global-listeners/role-claim/role-claim.js');
 const welcome = require('./global-listeners/welcome-message/welcome1.js');
 const memberCount = require('./global-listeners/memeber-count/member-count.js');
-const messageCounter = require('./global-listeners/message-counter/message-counter.js');
+const levels = require('./global-listeners/levels/levels.js');
 const advacnedPolls = require('./advanced-polls.js');
 const mongo = require('./mongo');
 const loadCommands = require('./commands/load-commands');
@@ -44,7 +44,7 @@ client.on('ready', async () => {
     memberCount(client);
 
     //Message Counter
-    messageCounter(client);
+    //levels(client);
 
     //advanced Polls
     advacnedPolls(client);
