@@ -4,7 +4,7 @@ const profileSchema = require('../database/schemas/profile-schema');
 module.exports = async (userId, diff) => {
     return await mongo().then(async (mongoose) => {
         try {
-            console.log(`updating user with:::::::: `, diff);
+            //console.log(`updating user with:::::::: `, diff);
             let result = await profileSchema
                 .findOneAndUpdate(
                     {
