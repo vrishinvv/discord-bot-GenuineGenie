@@ -1,2 +1,2 @@
-# discord-bot-GenuienGenie
+# discord-bot-GenuineGenie
 A bot that can do everything?
