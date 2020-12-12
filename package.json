@@ -1,25 +1,33 @@
 {
-  "name": "discord-bot-GenuienGenie",
-  "version": "1.0.0",
-  "description": "A bot that can do everything?",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vrishinvv/discord-bot-GenuienGenie.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/vrishinvv/discord-bot-GenuienGenie/issues"
-  },
-  "homepage": "https://github.com/vrishinvv/discord-bot-GenuienGenie#readme",
-  "dependencies": {
-    "discord.js": "^12.5.1",
-    "mongoose": "^5.11.7",
-    "redis": "^3.0.2"
-  }
+    "name": "discord-bot-GenuienGenie",
+    "version": "1.0.0",
+    "description": "A bot that can do everything?",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vrishinvv/discord-bot-GenuienGenie.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vrishinvv/discord-bot-GenuienGenie/issues"
+    },
+    "homepage": "https://github.com/vrishinvv/discord-bot-GenuienGenie#readme",
+    "dependencies": {
+        "discord.js": "^12.5.1",
+        "module-alias": "^2.2.2",
+        "mongoose": "^5.11.7",
+        "redis": "^3.0.2"
+    },
+    "_moduleAliases": {
+        "@root": ".",
+        "@schemas": "./database/schemas",
+        "@utils": "./utils",
+        "@features": "./features/features",
+        "@commands": "./commands/commands"
+    }
 }

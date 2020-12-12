@@ -1,4 +1,4 @@
-const redis = require('../../../redis');
+const redis = require('@root/database/redis');
 
 module.exports = {
     commands: ['mute'],

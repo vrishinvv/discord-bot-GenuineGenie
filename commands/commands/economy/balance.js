@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const getUser = require('../../helper-snips/getUser');
+const getUser = require('@utils/getUser');
 
 module.exports = {
     commands: ['bal', 'balance'],

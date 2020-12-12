@@ -1,10 +1,10 @@
-const gold = require('../../replies/gold.js');
-const nothing = require('../../replies/nothing.js');
-const items = require('../../replies/items.js');
-const updateCoins = require('../../helper-snips/updateCoins');
-const updateVault = require('../../helper-snips/updateVault');
-const getUser = require('../../helper-snips/getUser');
-const updatetUser = require('../../helper-snips/updateUser');
+const gold = require('@root/replies/gold.js');
+const nothing = require('@root/replies/nothing.js');
+const items = require('@root/replies/items.js');
+const updateCoins = require('@utils/updateCoins');
+const updateVault = require('@utils/updateVault');
+const getUser = require('@utils/getUser');
+const updatetUser = require('@utils/updateUser');
 
 module.exports = {
     commands: ['explore', 'exp'],

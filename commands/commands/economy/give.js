@@ -1,5 +1,5 @@
-const getUser = require('../../helper-snips/getUser');
-const updateCoins = require('../../helper-snips/updateCoins');
+const getUser = require('@utils/getUser');
+const updateCoins = require('@utils/updateCoins');
 
 module.exports = {
     commands: ['give'],

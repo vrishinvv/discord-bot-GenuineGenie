@@ -1,5 +1,5 @@
-const updateCoins = require('../../helper-snips/updateCoins');
-const getUser = require('../../helper-snips/getUser');
+const updateCoins = require('@utils/updateCoins');
+const getUser = require('@utils/getUser');
 
 module.exports = {
     commands: ['gamble'],

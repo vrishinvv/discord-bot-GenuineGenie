@@ -1,5 +1,5 @@
-const { prefix } = require('../config.json');
-const updateXP = require('../helper-snips/updateXP');
+const { prefix } = require('@root/config.json');
+const updateXP = require('@utils/updateXP');
 const validatePermissions = (permissions) => {
     const validPermissions = [
         'CREATE_INSTANT_INVITE',

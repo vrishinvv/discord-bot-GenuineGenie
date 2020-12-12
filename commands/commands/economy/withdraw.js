@@ -1,5 +1,5 @@
-const updateVault = require('../../helper-snips/updateVault');
-const getUser = require('../../helper-snips/getUser');
+const updateVault = require('@utils/updateVault');
+const getUser = require('@utils/getUser');
 
 module.exports = {
     commands: ['with', 'wit', 'withdraw'],
