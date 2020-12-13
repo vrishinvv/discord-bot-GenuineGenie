@@ -7,6 +7,7 @@ const path = require('path');
 const config = require('@root/config.json');
 const loadCommands = require('@root/commands/load-commands');
 const loadFeatures = require('@root/features/load-features');
+const { loadPrefixes } = require('./commands/command-base');
 
 /* 
 const { MongoClient } = require('mongodb');
@@ -42,18 +43,14 @@ client.on('ready', async () => {
         .registerDefaults()
         .registerCommandsIn(path.join(__dirname, 'cmds')); */
 
+    // load Prefixes
+    loadPrefixes(client);
+
     // Load commands
     loadCommands(client);
 
     // Load features
     loadFeatures(client);
-
-    // Setting bot's status
-    client.user.setPresence({
-        activity: {
-            name: `"${config.prefix} help" for help`,
-        },
-    });
 });
 
 client.login(config.token);

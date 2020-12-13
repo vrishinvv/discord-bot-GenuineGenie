@@ -1,5 +1,9 @@
-const { prefix } = require('@root/config.json');
+const mongo = require('@root/database/mongo');
+const prefixSchema = require('@schemas/prefix-schema');
+const { prefix: globalPrefix } = require('@root/config.json');
 const updateXP = require('@utils/updateXP');
+let givePrefix = globalPrefix;
+const guildPrefixes = {}; //guildId: prefix
 const validatePermissions = (permissions) => {
     const validPermissions = [
         'CREATE_INSTANT_INVITE',
@@ -94,8 +98,15 @@ module.exports = (client, commandOptions) => {
 
     client.on('message', async (message) => {
         const { member, content, guild } = message;
-
+        const prefix = guildPrefixes[guild.id] || globalPrefix;
+        givePrefix = prefix;
         const currentDate = new Date();
+        // Setting bot's status
+        client.user.setPresence({
+            activity: {
+                name: `"${prefix} help" - for help`,
+            },
+        });
 
         for (const alias of commands) {
             if (content.toLowerCase().startsWith(`${prefix} ${alias.toLowerCase()}`)) {
@@ -179,4 +190,31 @@ module.exports = (client, commandOptions) => {
             }
         }
     });
+};
+
+const loadPrefixes = async (client, guildId) => {
+    await mongo().then(async (mongoose) => {
+        try {
+            for (const guild of client.guilds.cache) {
+                //console.log(guild)
+                const result = await prefixSchema.findOne({ guildId: guild[1].id });
+                guildPrefixes[guild[1].id] = result?.prefix;
+            }
+        } finally {
+        }
+    });
+
+    if (guildId) {
+        // Setting bot's status
+        client.user.setPresence({
+            activity: {
+                name: `"${guildPrefixes[guildId]} help" - for help`,
+            },
+        });
+    }
+};
+module.exports.loadPrefixes = loadPrefixes;
+module.exports.getPrefix = (client, guildId) => {
+    loadPrefixes(client, guildId);
+    return guildPrefixes[guildId];
 };

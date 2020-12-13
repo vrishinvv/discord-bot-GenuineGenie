@@ -6,7 +6,6 @@ const reqString = {
 };
 
 const pollsSchema = mongoose.Schema({
-    guildId: reqString,
     channelId: reqString,
 });
 

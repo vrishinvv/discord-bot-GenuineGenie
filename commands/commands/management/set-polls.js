@@ -1,6 +1,8 @@
 const mongo = require('@root/database/mongo');
 const pollsSchema = require('@schemas/polls-schema');
 
+//let { cache } = require('@root/cache/polls-cache.js');
+
 module.exports = {
     commands: ['set-polls'],
     description: 'creates a `polls channel`',
@@ -12,11 +14,9 @@ module.exports = {
                 await pollsSchema
                     .findOneAndUpdate(
                         {
-                            guildId: guild.id,
                             channelId: channel.id,
                         },
                         {
-                            guildId: guild.id,
                             channelId: channel.id,
                         },
                         {
@@ -37,8 +37,7 @@ module.exports = {
 module.exports.onMessage = async (message) => {
     const { guild, content, channel } = message;
 
-    // fetch from db
-    console.log('FETCHING FROM DATABASE');
+    //console.log('FETCHING FROM DATABASE - on Message');
     let result = await mongo().then(async (mongoose) => {
         try {
             return await pollsSchema.findOne({ channelId: channel.id });
@@ -46,7 +45,6 @@ module.exports.onMessage = async (message) => {
             //mongoose.connection.close();
         }
     });
-
     if (!result) return;
 
     const eachLine = content.split('\n');

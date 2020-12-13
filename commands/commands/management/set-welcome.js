@@ -1,5 +1,6 @@
 const mongo = require('@root/database/mongo');
 const welcomeSchema = require('@schemas/welcome-schema');
+//let cache = require('@root/cache/welcome-cache.js');
 
 module.exports = {
     commands: ['set-welcome'],
@@ -39,7 +40,8 @@ module.exports.onJoin = async (member) => {
     const { guild } = member;
 
     // fetch from db
-    console.log('FETCHING FROM DATABASE');
+
+    console.log('FETCHING FROM DATABASE -on Join');
 
     let result = await mongo().then(async (mongoose) => {
         try {
@@ -48,7 +50,6 @@ module.exports.onJoin = async (member) => {
             //mongoose.connection.close();
         }
     });
-
     if (!result) return;
 
     let { channelId, text } = result;

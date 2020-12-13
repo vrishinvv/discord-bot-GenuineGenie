@@ -1,5 +1,6 @@
 const mongo = require('@root/database/mongo');
 const pollsSchema = require('@schemas/polls-schema');
+//let { cache } = require('@root/cache/polls-cache.js');
 
 module.exports = {
     commands: ['rem-polls'],
@@ -10,10 +11,14 @@ module.exports = {
         const result = await mongo().then(async (mongoose) => {
             try {
                 return await pollsSchema
-                    .findOneAndDelete({
-                        guildId: guild.id,
-                        channelId: channel.id,
-                    })
+                    .findOneAndDelete(
+                        {
+                            channelId: channel.id,
+                        },
+                        {
+                            new: false,
+                        }
+                    )
                     .exec();
             } finally {
                 //mongoose.connection.close();

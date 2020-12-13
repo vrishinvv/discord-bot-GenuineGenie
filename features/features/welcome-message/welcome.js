@@ -20,8 +20,6 @@
 const { onJoin } = require('@commands/management/set-welcome');
 const dummy = require('@commands/management/set-welcome');
 module.exports = async (client) => {
-    console.log(dummy);
-    console.log(onJoin);
     // set up event listner for channel
     client.on('guildMemberAdd', (member) => {
         onJoin(member);

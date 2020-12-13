@@ -1,5 +1,6 @@
 const mongo = require('@root/database/mongo');
 const welcomeSchema = require('@schemas/welcome-schema');
+//let cache = require('@root/cache/welcome-cache.js');
 
 module.exports = {
     commands: ['rem-welcome'],
@@ -10,10 +11,15 @@ module.exports = {
         const result = await mongo().then(async (mongoose) => {
             try {
                 return await welcomeSchema
-                    .findOneAndDelete({
-                        _id: guild.id,
-                        channelId: channel.id,
-                    })
+                    .findOneAndDelete(
+                        {
+                            _id: guild.id,
+                            channelId: channel.id,
+                        },
+                        {
+                            new: false,
+                        }
+                    )
                     .exec();
             } finally {
                 //mongoose.connection.close();
