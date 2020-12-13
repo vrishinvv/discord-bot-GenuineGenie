@@ -1,4 +1,4 @@
-module.exports = (client) => {
+/* module.exports = (client) => {
     const channelId = '786862580814839838'; //welcome
     const targetChannelId = '786863816058863656'; //rules-and-info
 
@@ -13,5 +13,17 @@ module.exports = (client) => {
         const channel = member.guild.channels.cache.get(channelId);
 
         channel.send(tell);
+    });
+};
+ */
+
+const { onJoin } = require('@commands/management/set-welcome');
+const dummy = require('@commands/management/set-welcome');
+module.exports = async (client) => {
+    console.log(dummy);
+    console.log(onJoin);
+    // set up event listner for channel
+    client.on('guildMemberAdd', (member) => {
+        onJoin(member);
     });
 };
