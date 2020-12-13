@@ -5,7 +5,7 @@ const reqString = {
     required: true,
 };
 
-const dailyRewardsSchema = mongoose.Schema(
+const hourlyRewardsSchema = mongoose.Schema(
     {
         userId: reqString,
     },
@@ -14,4 +14,4 @@ const dailyRewardsSchema = mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('daily-rewards', dailyRewardsSchema);
+module.exports = mongoose.model('hourly-rewards', hourlyRewardsSchema);

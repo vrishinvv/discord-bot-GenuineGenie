@@ -29,7 +29,7 @@ module.exports = (client) => {
                 commands.push(options);
                 const comm = options.commands;
                 if (typeof comm === 'string') comm = [comm];
-                temp.value += `\`${comm[0]}\`,`;
+                temp.value += `\`${comm[0]}\`, `;
                 if (client) {
                     commandBase(client, options);
                 }

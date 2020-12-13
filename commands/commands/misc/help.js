@@ -51,7 +51,7 @@ module.exports = {
                 if (cc.includes(query)) {
                     let aliases = '';
                     for (const name of cc) {
-                        aliases += `\`${name}\`,`;
+                        aliases += `\`${name}\`, `;
                     }
 
                     const { expectedArgs } = command;
