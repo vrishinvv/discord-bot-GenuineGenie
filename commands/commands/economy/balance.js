@@ -4,7 +4,7 @@ const getUser = require('@utils/getUser');
 module.exports = {
     commands: ['bal', 'balance'],
     description: "shows yours'/user's balance",
-    expectedArgs: "<user's @>",
+    expectedArgs: "<user's @>(opt)",
     permissionError: '',
     maxArgs: 1,
     /* cooldown: 5,

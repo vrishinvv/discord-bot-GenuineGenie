@@ -1,5 +1,5 @@
 module.exports = {
-    commands: ['create-vc'],
+    commands: ['set-vc'],
     expectedArgs: '<vc_name>',
     description: 'creates a voice channel',
     minArgs: 1,

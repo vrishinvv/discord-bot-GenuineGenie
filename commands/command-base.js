@@ -153,7 +153,7 @@ module.exports = (client, commandOptions) => {
 
                 // Ensure we have the correct number of arguments
                 if (arguments.length < minArgs || (maxArgs !== null && arguments.length > maxArgs)) {
-                    message.reply(`Incorrect syntax! use ${prefix} ${alias} ${expectedArgs}`);
+                    message.reply(`Incorrect syntax! use:\n *${prefix} ${alias} ${expectedArgs}*`);
                     return;
                 }
 

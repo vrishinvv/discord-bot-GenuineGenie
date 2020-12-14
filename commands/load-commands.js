@@ -40,8 +40,7 @@ module.exports = (client) => {
         temp = {};
     };
     readCommands('./');
-    fields.pop();
-    fields.pop();
+    fields.length = 4; // cos i have 4 directories in my commmadns folder
     //console.log(fields);
     return commands;
 };

@@ -37,6 +37,9 @@ module.exports = {
 module.exports.onMessage = async (message) => {
     const { guild, content, channel } = message;
 
+    // temporarily disabled
+    return;
+
     //console.log('FETCHING FROM DATABASE - on Message');
     let result = await mongo().then(async (mongoose) => {
         try {

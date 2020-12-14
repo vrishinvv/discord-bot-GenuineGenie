@@ -3,7 +3,6 @@ require('module-alias/register');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const path = require('path');
 const config = require('@root/config.json');
 const loadCommands = require('@root/commands/load-commands');
 const loadFeatures = require('@root/features/load-features');
