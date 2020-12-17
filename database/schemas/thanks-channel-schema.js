@@ -5,9 +5,9 @@ const reqString = {
     required: true,
 };
 
-const pollsSchema = mongoose.Schema({
+const thanksSchema = mongoose.Schema({
     guildId: reqString,
     channelId: reqString,
 });
 
-module.exports = mongoose.model('polls-channels', pollsSchema);
+module.exports = mongoose.model('thanks-channel-schema', thanksSchema);

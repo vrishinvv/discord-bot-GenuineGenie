@@ -114,5 +114,5 @@ module.exports = {
             message.relpy(`${tag} does not exist`);
         }
     },
-    permissions: ['ADMINISTRATOR'],
+    requiredRoles: 'Moderator',
 };

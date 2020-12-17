@@ -1,5 +1,5 @@
 module.exports = {
-    commands: ['set-vc'],
+    commands: ['setVC', 'set-vc'],
     expectedArgs: '<vc_name>',
     description: 'creates a voice channel',
     minArgs: 1,
@@ -14,4 +14,5 @@ module.exports = {
                 // channel.setUserLimit(10);
             });
     },
+    requiredRoles: 'Moderator',
 };

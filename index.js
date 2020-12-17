@@ -7,6 +7,7 @@ const config = require('@root/config.json');
 const loadCommands = require('@root/commands/load-commands');
 const loadFeatures = require('@root/features/load-features');
 const { loadPrefixes } = require('./commands/command-base');
+const mongo = require('@root/database/mongo');
 
 /* 
 const { MongoClient } = require('mongodb');
@@ -28,28 +29,32 @@ client.setMaxListeners(100);
         })
 );
  */
-console.log('Starting up Discord Client...');
-client.on('ready', async () => {
-    console.log('Estabished connection with Discord...');
-    console.log(`Logged in as ${client.user.tag}!\n`);
+try {
+    console.log('Starting up Discord Client...');
+    client.on('ready', async () => {
+        console.log('Estabished connection with Discord...');
+        console.log(`Logged in as ${client.user.tag}!\n`);
 
-    /* client.registry
-        .registerGroups([
-            ['moderation', 'moderation commands'],
-            ['misc', 'misc commands'],
-            ['economy', 'money and economy system commands'],
-        ])
-        .registerDefaults()
-        .registerCommandsIn(path.join(__dirname, 'cmds')); */
+        await mongo();
+        /* client.registry
+            .registerGroups([
+                ['moderation', 'moderation commands'],
+                ['misc', 'misc commands'],
+                ['economy', 'money and economy system commands'],
+            ])
+            .registerDefaults()
+            .registerCommandsIn(path.join(__dirname, 'cmds')); */
 
-    // load Prefixes
-    loadPrefixes(client);
+        // load Prefixes
+        loadPrefixes(client);
 
-    // Load commands
-    loadCommands(client);
+        // Load commands
+        loadCommands(client);
 
-    // Load features
-    loadFeatures(client);
-});
-
-client.login(config.token);
+        // Load features
+        loadFeatures(client);
+    });
+    client.login(config.token);
+} catch {
+    console.log(err, '\n');
+}

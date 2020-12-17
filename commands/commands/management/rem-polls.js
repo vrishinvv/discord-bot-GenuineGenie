@@ -1,9 +1,9 @@
 const mongo = require('@root/database/mongo');
 const pollsSchema = require('@schemas/polls-schema');
-//let { cache } = require('@root/cache/polls-cache.js');
+const { delFromCache } = require('@features/advanced-polls/advanced-polls');
 
 module.exports = {
-    commands: ['rem-polls'],
+    commands: ['remPolls', 'rem-polls'],
     description: 'removes the current channel from being a `polls channel`',
     callback: async (message, arguments, text, client) => {
         const { member, channel, guild, content } = message;
@@ -13,6 +13,7 @@ module.exports = {
                 return await pollsSchema
                     .findOneAndDelete(
                         {
+                            guildId: guild.id,
                             channelId: channel.id,
                         },
                         {
@@ -30,7 +31,10 @@ module.exports = {
             return;
         }
 
+        delFromCache(guild.id);
+
         message.reply('this channel is no longer a `polls channel`! ');
     },
     permissions: ['ADMINISTRATOR'],
+    requiredRoles: [],
 };

@@ -22,6 +22,6 @@ module.exports = {
             message.reply(`the \`slow mode\` has been set for this channel at **${duration}**s`);
         }
     },
-    permissions: ['ADMINISTRATOR'],
-    requiredRoles: [],
+
+    requiredRoles: 'Moderator',
 };

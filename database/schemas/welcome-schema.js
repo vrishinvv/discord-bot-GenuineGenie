@@ -6,7 +6,7 @@ const reqString = {
 };
 
 const welcomeSchema = mongoose.Schema({
-    _id: reqString,
+    guildId: reqString,
     channelId: reqString,
     text: reqString,
 });

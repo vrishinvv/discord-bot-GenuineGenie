@@ -1,17 +1,18 @@
 const mongo = require('@root/database/mongo');
-const welcomeSchema = require('@schemas/welcome-schema');
-const { delFromCache } = require('@features/welcome/welcome');
-//let cache = require('@root/cache/welcome-cache.js');
+const modlogsSchema = require('@schemas/modlogs-schema');
+const { delFromCache } = require('@features/mod-logs/mod-logs');
+
+//let { cache } = require('@root/cache/modlogs-cache.js');
 
 module.exports = {
-    commands: ['remWelcome', 'rem-welcome'],
-    description: 'removes the current channel from being a `welcome channel`',
+    commands: ['remModLogs', 'rem-modlogs', 'rem-mod-logs'],
+    description: 'removes the current channel from being a `modlogs channel`',
     callback: async (message, arguments, text, client) => {
         const { member, channel, guild, content } = message;
 
         const result = await mongo().then(async (mongoose) => {
             try {
-                return await welcomeSchema
+                return await modlogsSchema
                     .findOneAndDelete(
                         {
                             guildId: guild.id,
@@ -28,12 +29,13 @@ module.exports = {
         });
 
         if (!result) {
-            message.reply('this channel was not a `welcome channel`, but ok xD');
+            message.reply('this channel was not a `modlogs channel`, but ok xD');
             return;
         }
 
         delFromCache(guild.id);
-        message.reply('this channel is no longer a `welcome channel`! ');
+
+        message.reply('this channel is no longer a `modlogs channel`! ');
     },
     permissions: ['ADMINISTRATOR'],
 };

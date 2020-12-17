@@ -7,7 +7,7 @@ module.exports = {
     maxArgs: 2,
     cooldown: 5,
     repeats: 3,
-    callback: (message, arguments, text) => {
+    callback: (message, arguments, text, client) => {
         message.reply(`The sum is ${Number(arguments[0]) + Number(arguments[1])}`);
     },
     permissions: [],

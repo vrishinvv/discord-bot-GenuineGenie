@@ -15,7 +15,7 @@ module.exports = async (client, id, text, reactions = []) => {
         if (messages.size === 0) {
             // Send a new Message
             channel.send(text).then((message) => {
-                addReactions(message, reactions);
+                //addReactions(message, reactions);
             });
         } else {
             // Edit the existing message

@@ -1,17 +1,18 @@
 const mongo = require('@root/database/mongo');
-const welcomeSchema = require('@schemas/welcome-schema');
-const { delFromCache } = require('@features/welcome/welcome');
-//let cache = require('@root/cache/welcome-cache.js');
+const roleclaimSchema = require('@schemas/roleclaim-schema');
+const { delFromCache } = require('@features/role-claim/role-claim');
+
+//let { cache } = require('@root/cache/roleclaim-cache.js');
 
 module.exports = {
-    commands: ['remWelcome', 'rem-welcome'],
-    description: 'removes the current channel from being a `welcome channel`',
+    commands: ['remRoleClaim', 'rem-roleClaim', 'rem-role-claim'],
+    description: 'removes the current channel from being a `role claim channel`',
     callback: async (message, arguments, text, client) => {
         const { member, channel, guild, content } = message;
 
         const result = await mongo().then(async (mongoose) => {
             try {
-                return await welcomeSchema
+                return await roleclaimSchema
                     .findOneAndDelete(
                         {
                             guildId: guild.id,
@@ -28,12 +29,13 @@ module.exports = {
         });
 
         if (!result) {
-            message.reply('this channel was not a `welcome channel`, but ok xD');
+            message.reply('this channel was not a `role claim channel`, but ok xD');
             return;
         }
 
         delFromCache(guild.id);
-        message.reply('this channel is no longer a `welcome channel`! ');
+
+        message.reply('this channel is no longer a `roleclaim channel`! ');
     },
     permissions: ['ADMINISTRATOR'],
 };

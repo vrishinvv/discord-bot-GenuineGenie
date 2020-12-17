@@ -115,14 +115,16 @@ module.exports = (client, commandOptions) => {
                 // Ensure the user has the required permissions
                 for (const permission of permissions) {
                     if (!member.hasPermission(permission)) {
-                        message.reply(permissionError);
+                        message.reply(`You must have the "${permission}" to use this command.`);
                         return;
+                        //message.reply(permissionError);
                     }
                 }
 
+                if (typeof requiredRoles === 'string') requiredRoles = [requiredRoles];
                 // Enusre the user has the required roles
                 for (const requiredRole of requiredRoles) {
-                    const role = guild.rold.cache.find((role) => role.name === requiredRole);
+                    const role = guild.roles.cache.find((role) => role.name === requiredRole);
 
                     if (!role || !member.roles.cache.has(role.id)) {
                         message.reply(`You must have the "${requiredRole}" role to use this command.`);
@@ -203,6 +205,7 @@ const loadPrefixes = async (client, guildId) => {
         } finally {
         }
     });
+    console.log('finsihed loading prefix CACHE');
 
     if (guildId) {
         // Setting bot's status
@@ -215,6 +218,14 @@ const loadPrefixes = async (client, guildId) => {
 };
 module.exports.loadPrefixes = loadPrefixes;
 module.exports.getPrefix = (client, guildId) => {
-    loadPrefixes(client, guildId);
-    return guildPrefixes[guildId];
+    //oadPrefixes(client, guildId);
+    if (guildPrefixes[guildId]) return guildPrefixes[guildId];
+    else {
+        loadPrefixes();
+        guildPrefixes[guildId];
+    }
+};
+
+module.exports.updatePrefix = (guildID, newPrefix) => {
+    guildPrefixes[guildId] = newPrefix;
 };

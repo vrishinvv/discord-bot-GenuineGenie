@@ -5,7 +5,7 @@ const verificationChannelsSchema = require('@schemas/verification-channels-schem
 let verificationCache = {};
 
 const fetchData = async (client) => {
-    console.log('FETCHING DATA - verifcation channel - cache populate');
+    //console.log('FETCHING DATA - verifcation channel - cache populate');
 
     await mongo().then(async (mongoose) => {
         try {
@@ -13,7 +13,7 @@ const fetchData = async (client) => {
 
             for (const result of results) {
                 const { guildId, channelId, roleId } = result;
-                const guild = client.guilds.cache.get(guildId);
+                const guild = client?.guilds.cache.get(guildId);
                 if (guild) {
                     const channel = guild.channels.cache.get(channelId);
                     if (channel) {
@@ -30,6 +30,7 @@ const fetchData = async (client) => {
                                     value.users.fetch().then((res) => {
                                         for (const [id, val] of res) {
                                             const member = guild.members.cache.get(id);
+                                            if (!member) continue;
                                             member.roles.add(roleId);
                                         }
                                     });
@@ -39,6 +40,7 @@ const fetchData = async (client) => {
                     }
                 }
             }
+            console.log('finsihed loading prefix CACHE');
         } finally {
         }
     });
@@ -63,7 +65,7 @@ module.exports = (client) => {
         //console.log('im printing this: ', roleId, user);
         if (roleId) {
             const { guild } = reaction.message;
-
+            console.log(user);
             //guild member has more p   roperties than user object. though the ids are same
             const member = guild.members.cache.get(user.id);
             member.roles.add(roleId);
@@ -78,7 +80,7 @@ module.exports = (client) => {
         if (roleId) {
             const { guild } = reaction.message;
 
-            //guild member has more p   roperties than user object. though the ids are same
+            //guild member has more properties than user object. though the ids are same
             const member = guild.members.cache.get(user.id);
             member.roles.remove(roleId);
         }

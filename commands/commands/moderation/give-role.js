@@ -33,6 +33,6 @@ module.exports = {
 
         message.channel.send(`111<@${targetUser.id}> now has the role ${roleName}`);
     },
-    permissions: ['ADMINISTRATOR'],
-    requiredRoles: [],
+
+    requiredRoles: 'Moderator',
 };

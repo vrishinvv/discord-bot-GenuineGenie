@@ -1,5 +1,5 @@
 module.exports = {
-    commands: ['set-tc'],
+    commands: ['setTC', 'set-tc'],
     expectedArgs: '<tc_name>',
     description: 'creates a text channel',
     minArgs: 1,
@@ -16,4 +16,5 @@ module.exports = {
                 // channel.setParent('<categoryID>')
             });
     },
+    requiredRoles: 'Moderator',
 };

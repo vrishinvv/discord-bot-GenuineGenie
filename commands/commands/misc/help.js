@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const loadCommands = require('@root/commands/load-commands');
-const { prefix } = require('@root/config.json');
 
 module.exports = {
     commands: ['help'],
@@ -14,7 +13,7 @@ module.exports = {
         const prefix = getPrefix(client, message.guild.id);
 
         if (arguments.length === 0) {
-            for (const command of commands) {
+            /* for (const command of commands) {
                 let permissions = command.permission;
                 if (permissions) {
                     let hasPermission = true;
@@ -41,7 +40,23 @@ module.exports = {
 
                 reply += `**${prefix} ${mainCommand}${args}** = ${description}\n`;
             }
-            message.channel.send(reply);
+            message.channel.send(reply); */
+            const { guild } = message;
+
+            const getPrefix = require('@root/commands/command-base').getPrefix;
+            const prefix = getPrefix(client, guild.id);
+            const fields = require('@root/commands/load-commands.js').fields;
+
+            let footer = `\n\n\`${prefix} help <command_name>\` - to know more about a command\n`;
+            footer += `NOTE: Some commands require special *roles* and/or *permissions* to run`;
+            const embed = new Discord.MessageEmbed()
+                //.setDescription('modules and commands of the GG-bot')
+                //.setTitle(`_Genuine Genie_ #HELP`)
+                .addFields(...fields)
+                .setFooter(footer)
+                .setColor('RANDOM');
+
+            message.channel.send(embed);
         } else {
             const query = arguments[0];
             for (const command of commands) {
@@ -59,22 +74,39 @@ module.exports = {
                     const args = expectedArgs ? ` ${expectedArgs}` : ``;
                     const format = `*${prefix} ${mainCommand}${args}*`;
 
-                    const embed = new Discord.MessageEmbed()
-                        .addFields(
-                            {
-                                name: 'aliases',
-                                value: aliases,
-                            },
-                            {
-                                name: 'description',
-                                value: command.description,
-                            },
-                            {
-                                name: 'format',
-                                value: format,
-                            }
-                        )
-                        .setColor('RANDOM');
+                    const fields = [];
+                    fields.push({
+                        name: 'aliases',
+                        value: aliases,
+                    });
+                    fields.push({
+                        name: 'description',
+                        value: command.description,
+                    });
+                    fields.push({
+                        name: 'format',
+                        value: format,
+                    });
+
+                    if (command.requiredRoles?.length) {
+                        let rol = command.requiredRoles;
+                        if (typeof rol === 'string') rol = [rol];
+                        fields.push({
+                            name: 'Required Roles',
+                            value: rol.join(', '),
+                        });
+                    }
+
+                    if (command.permissions?.length) {
+                        let per = command.permissions;
+                        if (typeof per === 'string') per = [per];
+                        fields.push({
+                            name: 'Required Permissions',
+                            value: per.join(', '),
+                        });
+                    }
+
+                    const embed = new Discord.MessageEmbed().addFields(fields).setColor('RANDOM');
 
                     message.channel.send(embed);
                 }

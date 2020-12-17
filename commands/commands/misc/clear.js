@@ -8,6 +8,5 @@ module.exports = {
             message.channel.bulkDelete(results);
         });
     },
-    permissions: ['ADMINISTRATOR'],
-    requiredRoles: [],
+    requiredRoles: ['Moderator'],
 };

@@ -17,5 +17,5 @@ module.exports = {
             message.relpy(`${tag} does not exist`);
         }
     },
-    permissions: ['ADMINISTRATOR', 'BAN_MEMBERS'], //kick?
+    permissions: ['ADMINISTRATOR', 'KICK_MEMBERS'], //kick?
 };

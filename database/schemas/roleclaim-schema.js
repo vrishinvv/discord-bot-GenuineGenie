@@ -5,9 +5,10 @@ const reqString = {
     required: true,
 };
 
-const pollsSchema = mongoose.Schema({
+const roleclaimSchema = mongoose.Schema({
     guildId: reqString,
     channelId: reqString,
+    emojiRoles: reqString,
 });
 
-module.exports = mongoose.model('polls-channels', pollsSchema);
+module.exports = mongoose.model('roleclaim-channels', roleclaimSchema);

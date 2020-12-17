@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const getUser = require('@utils/getUser');
 
 module.exports = {
-    commands: ['bal', 'balance'],
+    commands: ['balance', 'bal'],
     description: "shows yours'/user's balance",
     expectedArgs: "<user's @>(opt)",
     permissionError: '',

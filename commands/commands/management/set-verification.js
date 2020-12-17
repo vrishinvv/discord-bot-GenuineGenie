@@ -1,22 +1,29 @@
 const mongo = require('@root/database/mongo');
-const verificationChannelsSchema = require('../../../database/schemas/verification-channels-schema');
+const verificationChannelsSchema = require('@schemas/verification-channels-schema');
 const { fetch } = require('@features/verification-channel/verification-channel');
 //let { cache } = require('@root/cache/verification-channels-cache.js');
 
 module.exports = {
-    commands: ['set-verification', 'set-ver'],
-    description: 'creates a `verification channel`',
-    expectedArgs: '<emoji> <roleID>',
+    commands: ['setVerification', 'set-verification', 'set-ver'],
+    description: 'set a channel to a `verification channel`',
+    expectedArgs: '<emoji> <role> <#channel_name>(opt)',
     permissionError: '',
     minArgs: 2,
-    maxArgs: 2,
+    maxArgs: 3,
     callback: async (message, arguments, text, client) => {
         const seconds = 3;
-        const { member, channel, guild, content } = message;
+        const { member, guild, content } = message;
+        const channel = message.mentions.channels.first() || message.channel;
+
+        if (message.mentions.channels.first()) {
+            arguments.length = arguments.length - 1;
+            text = arguments.join(' ');
+        }
 
         let emoji = arguments[0];
-        const roleId = arguments[1];
-        console.log(emoji, roleId);
+        const roleName = arguments[1];
+        const role = guild.roles.cache.find((role) => role.name === roleName);
+        const roleId = role.id;
 
         //Custom emojis have this syntax { EmojiName: emojiCode }
         if (emoji.includes(':')) {
@@ -27,7 +34,6 @@ module.exports = {
             });
         }
 
-        const role = guild.roles.cache.get(roleId);
         if (!role) {
             message.reply('That role does not exist').then((message) => {
                 setTimeout(() => {
@@ -48,9 +54,8 @@ module.exports = {
                 if (!firstMessage) {
                     channel.send('There is no message to react to').then((message) => {
                         // deletes the bots response message
-                        setTimeout(() => {
-                            message.delete();
-                        }, seconds * 1000);
+
+                        message.delete({ timeout: seconds * 1000 });
                     });
                 }
 

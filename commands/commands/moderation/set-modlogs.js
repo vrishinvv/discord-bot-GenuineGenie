@@ -1,22 +1,17 @@
 const mongo = require('@root/database/mongo');
-const pollsSchema = require('@schemas/polls-schema');
-const { addToCache } = require('@features/advanced-polls/advanced-polls');
-
-//let { cache } = require('@root/cache/polls-cache.js');
+const modlogsSchema = require('@schemas/modlogs-schema');
+const { addToCache } = require('@features/mod-logs/mod-logs');
+//let { cache } = require('@root/cache/modlogs-cache.js');
 
 module.exports = {
-    commands: ['setPolls', 'set-polls'],
-    expectedArgs: '<#channel_name>(opt)',
-    description: 'sets a channel to a `polls channel`',
-    maxArgs: 1,
+    commands: ['setModLogs', 'set-modlogs', 'set-mod-logs'],
+    description: 'sets a channel to be a `modlogs channel`',
     callback: async (message, arguments, text, client) => {
-        const { member, guild, content } = message;
-
-        const channel = message.mentions.channels.first() || message.channel;
+        const { member, channel, guild, content } = message;
 
         await mongo().then(async (mongoose) => {
             try {
-                await pollsSchema
+                await modlogsSchema
                     .findOneAndUpdate(
                         {
                             guildId: guild.id,
@@ -36,8 +31,7 @@ module.exports = {
         });
 
         addToCache(guild.id, channel.id);
-
-        message.reply('you have set this channel to a `polls channel`!');
+        message.reply('you have set this channel to a `modlogs channel`!');
     },
     permissions: ['ADMINISTRATOR'],
 };

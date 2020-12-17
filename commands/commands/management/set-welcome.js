@@ -1,60 +1,47 @@
 const mongo = require('@root/database/mongo');
 const welcomeSchema = require('@schemas/welcome-schema');
-//let cache = require('@root/cache/welcome-cache.js');
+const { addToCache } = require('@features/welcome/welcome.js');
 
 module.exports = {
-    commands: ['set-welcome'],
-    expectedArgs: '<welcome_text>',
-    description: 'creates a `welcome channel`',
+    commands: ['setWelcome', 'set-welcome'],
+    expectedArgs: '<channel<welcome_text>',
+    description: 'sets a channel to a `welcome channel`',
+    maxArgs: null,
     callback: async (message, arguments, text, client) => {
-        const { member, channel, guild, content } = message;
+        const { member, guild, content } = message;
+        const channel = message.mentions.channels.last() || message.channel;
 
-        await mongo().then(async (mongoose) => {
-            try {
-                await welcomeSchema
-                    .findOneAndUpdate(
-                        {
-                            _id: guild.id,
-                        },
-                        {
-                            _id: guild.id,
-                            channelId: channel.id,
-                            text,
-                        },
-                        {
-                            upsert: true,
-                        }
-                    )
-                    .exec();
-            } finally {
-                //mongoose.connection.close();
-            }
-        });
+        if (message.mentions.channels.first()) {
+            arguments.length = arguments.length - 1;
+        }
+        console.log(arguments);
+        text = arguments.join(' ');
+        console.log(arguments);
+        console.log(channel.id);
+        if (text === '') {
+            //console.log(message.mentions.channel.first().id, message.channel.id);
+            message.reply('Cannot set welcome message to empty string');
+            return;
+        }
 
-        message.reply('you have set this channel to a `welcome channel`!');
+        await welcomeSchema
+            .findOneAndUpdate(
+                {
+                    guildId: guild.id,
+                },
+                {
+                    guildId: guild.id,
+                    channelId: channel.id,
+                    text,
+                },
+                {
+                    upsert: true,
+                }
+            )
+            .exec();
+
+        addToCache(guild.id, channel.id, text);
+        message.reply(`you have set <#${channel.id}> to a \`welcome channel\`!`);
     },
     permissions: ['ADMINISTRATOR'],
-};
-
-module.exports.onJoin = async (member) => {
-    const { guild } = member;
-
-    // fetch from db
-
-    console.log('FETCHING FROM DATABASE -on Join');
-
-    let result = await mongo().then(async (mongoose) => {
-        try {
-            return await welcomeSchema.findOne({ _id: guild.id });
-        } finally {
-            //mongoose.connection.close();
-        }
-    });
-    if (!result) return;
-
-    let { channelId, text } = result;
-    const channel = guild.channels.cache.get(channelId);
-
-    text = text.replace(/<@>/g, `<@${member.user.tag}>`);
-    channel.send(text);
 };
