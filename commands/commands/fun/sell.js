@@ -69,6 +69,13 @@ module.exports = {
             return;
         }
 
+        const total = quantity * cash[status];
+        message.reply(
+            `you have earned **${total.toLocaleString()}** coins by selling \n**x${quantity.toLocaleString()}** ${
+                inventory[item].emoji
+            }\`${item}\` - [**${status}**] `
+        );
+
         inventory[item].count -= quantity;
         if (inventory[item].count === 0) {
             delete inventory[item];
@@ -77,13 +84,6 @@ module.exports = {
         result.inventoryCount -= quantity;
         result.coins += quantity * cash[status];
         await profileSchema.findOneAndUpdate({ userId }, result);
-
-        const total = quantity * cash[status];
-        message.reply(
-            `you have earned **${total.toLocaleString()}** coins by selling \n**x${quantity.toLocaleString()}** ${
-                inventory[item].emoji
-            }\`${item}\` - [**${status}**] `
-        );
     },
     permissions: [],
     requiredRoles: [],
