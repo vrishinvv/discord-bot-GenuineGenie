@@ -54,7 +54,7 @@ try {
         // Load features
         loadFeatures(client);
     });
-    client.login(process.env.token);
+    client.login(config.token);
 } catch {
     console.log(err, '\n');
 }
