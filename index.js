@@ -54,7 +54,7 @@ try {
         // Load features
         loadFeatures(client);
     });
-    client.login(config.token);
+    client.login(prcoess.env.token);
 } catch {
     console.log(err, '\n');
 }

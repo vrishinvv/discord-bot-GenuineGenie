@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const { version } = require('@root/package.json');
 
 module.exports = {
-    commands: ['botinfo', 'bot-info'],
+    commands: ['userInfo', 'user-info'],
     description: "display's bot information",
 
     callback: async (message, arguments, text, client) => {
