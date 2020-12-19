@@ -88,7 +88,7 @@ module.exports = {
                         value: format,
                     });
 
-                    if (command.requiredRoles?.length) {
+                    if (command.requiredRoles ? command.requiredRoles.length : undefined) {
                         let rol = command.requiredRoles;
                         if (typeof rol === 'string') rol = [rol];
                         fields.push({
@@ -97,7 +97,7 @@ module.exports = {
                         });
                     }
 
-                    if (command.permissions?.length) {
+                    if (command.permissions ? command.permissions.length : undefined) {
                         let per = command.permissions;
                         if (typeof per === 'string') per = [per];
                         fields.push({

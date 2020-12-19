@@ -198,7 +198,7 @@ const loadPrefixes = async (client, guildId) => {
     for (const guild of client.guilds.cache) {
         //console.log(guild)
         const result = await prefixSchema.findOne({ guildId: guild[1].id });
-        guildPrefixes[guild[1].id] = result?.prefix;
+        guildPrefixes[guild[1].id] = result ? result.prefix : globalPrefix;
     }
 
     console.log('finsihed loading prefix CACHE');
