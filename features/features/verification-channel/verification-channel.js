@@ -13,7 +13,7 @@ const fetchData = async (client) => {
 
             for (const result of results) {
                 const { guildId, channelId, roleId } = result;
-                const guild = client ? clien.guilds.cache.get(guildId) : undefined;
+                const guild = client ? client.guilds.cache.get(guildId) : undefined;
                 if (guild) {
                     const channel = guild.channels.cache.get(channelId);
                     if (channel) {
