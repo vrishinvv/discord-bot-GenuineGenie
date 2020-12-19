@@ -2,9 +2,8 @@ const { MessageEmbed } = require('discord.js');
 const { version } = require('@root/package.json');
 
 module.exports = {
-    commands: ['botinfo', 'bot-info'],
+    commands: ['botInfo', 'bot-info'],
     description: "display's bot information",
-
     callback: async (message, arguments, text, client) => {
         const getPrefix = require('@root/commands/command-base').getPrefix;
         const prefix = getPrefix(client, message.guild.id);
@@ -43,7 +42,7 @@ module.exports = {
                 }
             )
             .setColor('RANDOM');
-        //message.channel.send(embed);
+        message.channel.send(embed);
     },
     permissions: [],
     requiredRoles: [],
