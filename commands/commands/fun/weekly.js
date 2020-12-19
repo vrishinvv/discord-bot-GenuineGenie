@@ -42,7 +42,7 @@ module.exports = {
                     const now = new Date().getTime();
 
                     const diffTime = Math.abs(now - then);
-                    const diffWeekly = diffTime / (1000 * 60 * 60 * 7);
+                    const diffWeekly = diffTime / (1000 * 60 * 60 * 24 * 7);
 
                     if (diffWeekly <= 1) {
                         claimedCache.push(id);

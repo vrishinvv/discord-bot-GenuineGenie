@@ -11,5 +11,6 @@ module.exports.getCoins = async (name, userId) => {
         } finally {
             //mongoose.connection.close();
         }
+        1;
     });
 };

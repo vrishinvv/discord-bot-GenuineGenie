@@ -16,13 +16,12 @@ module.exports = {
         const result = await getUser(name, userId);
 
         if (result.vault_coins === 0) {
-            message.reply('Your vault is empty!');
+            message.reply('Your vault is empty  !');
             return;
         }
 
         if (arguments[0] === 'max') {
             let delta = result.vault_coins;
-
             await updateVault(userId, -delta);
             message.reply(`Transferred **${delta}** :coin: to your coin pouch.`);
         } else if (!isNaN(Number(arguments[0]))) {

@@ -13,8 +13,10 @@ module.exports = {
         const member = message.guild.members.cache.get(targetId);
 
         const result = await getUser(name, targetId);
-        let desc = `Coins:\t **${result.coins}**`;
-        desc += `\nVault:\t **${result.vault_coins}/${result.vault_size}**`;
+        let desc = `Coins:\t **${result.coins.toLocaleString()}**`;
+        desc += `\nVault:\t **${result.vault_coins.toLocaleString()}/${result.vault_size.toLocaleString()}**`;
+        desc += `\nTotal: **${(result.coins + result.vault_coins).toLocaleString()}**`;
+        desc += `\nInventory:\t *${result.inventoryCount.toLocaleString()}*`;
 
         //TODO:: complete this bit
         let itemReply = '';
@@ -24,9 +26,9 @@ module.exports = {
             .addFields(
                 {
                     name: 'General',
-                    value: `Level: **${result.level}**\nXP: \`${result.xp}/${
-                        result.level * 200 + result.commands_issued * 10
-                    }\`\nCommands Issued: *${result.commands_issued}*`,
+                    value: `Level: **${result.level.toLocaleString()}**\nXP: \`${result.xp.toLocaleString()}/${
+                        result.level.toLocaleString() * 200 + result.commands_issued.toLocaleString() * 10
+                    }\`\nATK: **${result.atk.toLocaleString()}**     DEF:**${result.def.toLocaleString()}**\nCommands Issued: *${result.commands_issued.toLocaleString()}*`,
                 },
                 {
                     name: 'Richness',

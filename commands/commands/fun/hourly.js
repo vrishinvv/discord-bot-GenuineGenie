@@ -42,7 +42,7 @@ module.exports = {
                     const now = new Date().getTime();
 
                     const diffTime = Math.abs(now - then);
-                    const diffHours = diffTime / (1000 * 60);
+                    const diffHours = diffTime / (1000 * 60 * 60);
 
                     if (diffHours <= 1) {
                         claimedCache.push(id);

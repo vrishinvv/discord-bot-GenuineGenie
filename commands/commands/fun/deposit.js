@@ -15,21 +15,22 @@ module.exports = {
 
         const result = await getUser(name, userId);
 
-        const available = result.vault_size - result.vault_coins;
-        if (available === 0) {
+        const available_space_in_vault = result.vault_size - result.vault_coins;
+        if (available_space_in_vault === 0) {
             message.reply('Your vault is already full!');
             return;
         }
         if (arguments[0] === 'max') {
-            await updateVault(userId, available);
-            message.reply(`Transferred **${available}** :coin: to vault.`);
+            const toDeposit = Math.min(available_space_in_vault, result.coins);
+            await updateVault(userId, toDeposit);
+            message.reply(`Transferred **${toDeposit}** :coin: to vault.`);
         } else {
             let delta = +arguments[0];
             if (delta < 0) {
                 message.reply('-.- what is negative cash?');
             } else if (delta > result.coins) {
                 message.reply('You dont have that much to deposit!');
-            } else if (delta > available) {
+            } else if (delta > available_space_in_vault) {
                 message.reply('Your vault will break if you deposit more than it can hold!');
             } else {
                 await updateVault(userId, delta);

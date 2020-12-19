@@ -17,7 +17,17 @@ module.exports = {
             return;
         }
 
+        if (target === message.author.id) {
+            message.reply('Funny you thought that will work xD');
+            return;
+        }
+
         arguments.shift();
+        const delta = +arguments[0];
+        if (isNaN(delta)) {
+            message.reply('please provide a valid amount of coins to give');
+            return;
+        }
 
         const userName = message.author.username;
         const userId = message.author.id;

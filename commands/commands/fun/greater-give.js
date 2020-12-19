@@ -29,10 +29,12 @@ module.exports = {
             return;
         }
 
+        if (delta < 0) {
+            message.reply('-.- what is negative cash?');
+            return;
+        }
         await updateCoins(targetId, +delta);
-        message.channel.send(
-            `<@${targetId}>, the god's favour you! you were instantly given **${delta}** :coin: to <@${targetId}>.`
-        );
+        message.channel.send(`<@${targetId}>, the god's favour you! you were instantly given **${delta}** :coin:.`);
     },
     permissions: ['ADMINISTRATOR'],
     requiredRoles: [],

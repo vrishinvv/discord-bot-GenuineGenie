@@ -195,16 +195,12 @@ module.exports = (client, commandOptions) => {
 };
 
 const loadPrefixes = async (client, guildId) => {
-    await mongo().then(async (mongoose) => {
-        try {
-            for (const guild of client.guilds.cache) {
-                //console.log(guild)
-                const result = await prefixSchema.findOne({ guildId: guild[1].id });
-                guildPrefixes[guild[1].id] = result?.prefix;
-            }
-        } finally {
-        }
-    });
+    for (const guild of client.guilds.cache) {
+        //console.log(guild)
+        const result = await prefixSchema.findOne({ guildId: guild[1].id });
+        guildPrefixes[guild[1].id] = result?.prefix;
+    }
+
     console.log('finsihed loading prefix CACHE');
 
     if (guildId) {
@@ -216,6 +212,7 @@ const loadPrefixes = async (client, guildId) => {
         });
     }
 };
+
 module.exports.loadPrefixes = loadPrefixes;
 module.exports.getPrefix = (client, guildId) => {
     //oadPrefixes(client, guildId);

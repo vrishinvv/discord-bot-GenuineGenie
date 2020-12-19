@@ -29,15 +29,34 @@ module.exports = {
         */
 
         // Make's sure the user exist's
-        const result = await getUser(name, userId);
+        let result = await getUser(name, userId);
+        let inventory = JSON.parse(result.items);
 
         if (0 <= search_chance && search_chance < 10) {
             const rnd = Math.floor(Math.random() * items.length);
             const res = items[rnd];
             const { hunting_bow, fishing_rod } = res;
-            result.hunting_bow = hunting_bow;
-            result.fishing_rod = fishing_rod;
+            if (hunting_bow) {
+                if (!inventory['hunting bow']) {
+                    inventory['hunting bow'] = {
+                        emoji: '🏹',
+                        count: 1,
+                    };
+                } else {
+                    inventory['hunting bow'].count++;
+                }
+            } else if (fishing_rod) {
+                if (!inventory['fishing pole']) {
+                    inventory['fishing pole'] = {
+                        emoji: '🎣',
+                        count: 1,
+                    };
+                } else {
+                    inventory['fishing pole'].count++;
+                }
+            }
 
+            result.items = JSON.stringify(inventory);
             await updatetUser(userId, result);
             message.reply(res.description);
         } else if (0 <= search_chance - 10 && search_chance - 10 < 170) {
@@ -56,8 +75,9 @@ module.exports = {
         }
 
         if (0 <= break_item && break_item < 200) {
-            if (result.hunting_bow) {
-                result.hunting_bow = false;
+            if (inventory['hunting bow']) {
+                inventory['hunting bow'].count--;
+                result.items = JSON.stringify(inventory);
                 await updatetUser(userId, result);
                 message.reply('Your bow :bow_and_arrow: just snapped into two. What did you two?');
             }

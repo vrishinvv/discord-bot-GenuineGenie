@@ -9,25 +9,21 @@ module.exports = {
     callback: async (message, arguments, text, client) => {
         const guildId = message.guild.id;
         const prefix = arguments[0];
-        await mongo().then(async (mongoose) => {
-            try {
-                await prefixSchema
-                    .findOneAndUpdate(
-                        {
-                            guildId,
-                        },
-                        {
-                            guildId,
-                            prefix,
-                        },
-                        {
-                            upsert: true,
-                        }
-                    )
-                    .exec();
-            } finally {
-            }
-        });
+
+        await prefixSchema
+            .findOneAndUpdate(
+                {
+                    guildId,
+                },
+                {
+                    guildId,
+                    prefix,
+                },
+                {
+                    upsert: true,
+                }
+            )
+            .exec();
 
         loadPrefixes(client, guildId);
         updatePrefix(guildId, prefix);

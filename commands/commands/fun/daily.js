@@ -14,7 +14,7 @@ clearCache();
 
 module.exports = {
     commands: ['daily'],
-    description: 'get some fantastic daily rewards',
+    description: 'get some fantastic daily rewards, coins, xp and what not?',
     expectedArgs: "<user's @>",
     /* cooldown: 5,
     repeats: 3, */
@@ -61,7 +61,7 @@ module.exports = {
                 const XP = Math.floor(Math.random() * 20) + 25;
                 await updateXP(message.author.id, XP, message);
 
-                message.reply(`WOAH! you just got **${coins}** coins and \`${XP}\`XP`);
+                message.reply(`> WOAH! you just got **${coins}** coins and \`${XP}\`XP`);
             } finally {
             }
         });

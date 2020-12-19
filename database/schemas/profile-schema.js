@@ -21,8 +21,10 @@ const profileSchema = mongoose.Schema({
     coins: reqNumber,
     vault_coins: reqNumber,
     vault_size: reqNumber,
-    hunting_bow: reqBoolean,
-    fishing_rod: reqBoolean,
+    items: reqString,
+    huntedCount: reqNumber,
+    fishedCount: reqNumber,
+    inventoryCount: reqNumber,
     commands_issued: {
         type: Number,
         default: 0,
@@ -34,6 +36,18 @@ const profileSchema = mongoose.Schema({
     level: {
         type: Number,
         default: 1,
+    },
+    hp: {
+        type: Number,
+        default: 100,
+    },
+    atk: {
+        type: Number,
+        default: 30,
+    },
+    def: {
+        type: Number,
+        default: 30,
     },
 });
 

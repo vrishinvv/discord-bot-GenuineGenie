@@ -16,10 +16,15 @@ module.exports = {
         const result = await getUser(name, userId);
 
         if (result.coins < Number(arguments[0])) {
-            message.reply('Insufficient :coin: to Gamble');
+            message.reply('Hello, please gamble with what you have xD');
         } else if (+arguments[0] < 400) {
             message.reply('Need atleast **400** :coin: to gamble');
         } else {
+            const delta = +arguments[0];
+            if (isNaN(delta)) {
+                message.reply('please provide a valid amount of coins to give');
+                return;
+            }
             const flip = Math.random() * 2;
             if (flip >= 1) {
                 const new_coins = Math.floor(Number(arguments[0]) * (Math.random() * 1.5 + 1));
