@@ -62,8 +62,11 @@ module.exports = {
             const query = arguments[0].toLowerCase();
             //console.log(query);
             for (const command of commands) {
-                const cc = command.commands;
+                let cc = command.commands;
                 if (typeof cc === 'string') cc = [cc];
+                for (let i = 0; i < cc.length; i++) {
+                    cc[i] = cc[i].toLowerCase();
+                }
 
                 if (cc.includes(query)) {
                     let aliases = '';
