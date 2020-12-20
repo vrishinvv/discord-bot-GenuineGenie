@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const getUser = require('@utils/getUser');
 
 module.exports = {
-    commands: ['inventory'],
+    commands: ['inventory', 'inv'],
     description: "shows yours'/user's inventory",
     expectedArgs: "<user's @>(opt)",
     permissionError: '',

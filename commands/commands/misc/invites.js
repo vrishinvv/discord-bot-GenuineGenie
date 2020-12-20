@@ -23,12 +23,12 @@ module.exports = {
 
         sortedInvites.length = Math.min(sortedInvites.length, 10);
 
-        console.log(sortedInvites);
+        //console.log(sortedInvites);
         let i = 1;
         let replyText = ``;
         for (const invite of sortedInvites) {
             const count = inviteCounter[invite];
-            console.log(invite, count);
+            //console.log(invite, count);
             replyText += `\n(${i}). **${invite}** has invited **${count}** member(s)!`;
             i += 1;
         }

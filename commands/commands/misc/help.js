@@ -12,6 +12,7 @@ module.exports = {
         const getPrefix = require('@root/commands/command-base').getPrefix;
         const prefix = getPrefix(client, message.guild.id);
 
+        let ok = 0;
         if (arguments.length === 0) {
             /* for (const command of commands) {
                 let permissions = command.permission;
@@ -58,7 +59,8 @@ module.exports = {
 
             message.channel.send(embed);
         } else {
-            const query = arguments[0];
+            const query = arguments[0].toLowerCase();
+            //console.log(query);
             for (const command of commands) {
                 const cc = command.commands;
                 if (typeof cc === 'string') cc = [cc];
@@ -106,11 +108,16 @@ module.exports = {
                         });
                     }
 
+                    ok = 1;
                     const embed = new Discord.MessageEmbed().addFields(fields).setColor('RANDOM');
 
                     message.channel.send(embed);
                 }
             }
+        }
+
+        if (!ok) {
+            message.reply('No such command\n**TIP** `help` command for the full list of commands');
         }
     },
 };

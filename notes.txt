@@ -1,0 +1,3 @@
+[] -  verification command wokring?
+[] - rem verification ?
+[] - setTC, remTC, setVC, remVC wokrin?

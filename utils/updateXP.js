@@ -42,7 +42,7 @@ module.exports = async (userId, delta, message) => {
                 result.xp = xp;
                 result.level = level;
                 result.vault_size = vault_size;
-                console.log(result);
+                //console.log(result);
                 await updateUser(userId, result);
                 message
                     .reply(`:confetti_ball: You are now Level **${level}**! Use bot-commands to gain more XP!`)

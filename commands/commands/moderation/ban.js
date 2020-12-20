@@ -8,7 +8,7 @@ module.exports = {
         const { member, mentions } = message;
         const target = mentions.users.first();
         const tag = `<@${target.id}>`;
-        console.log(target);
+        //console.log(target);
         if (target) {
             const targetMember = message.guild.members.cache.get(target.id);
             targetMember.ban();

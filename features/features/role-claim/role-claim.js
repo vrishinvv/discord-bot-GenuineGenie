@@ -36,12 +36,15 @@ const onMessage = async (message, old) => {
     const { guild, content, channel } = message;
     //message.reactions.removeAll();
 
+    if (!roleclaimCache[guild.id]) return;
     const [channelId, emojiRoles] = roleclaimCache[guild.id];
+
     if (channelId !== channel.id) {
         return;
     }
+    if (!emojiRoles) return;
 
-    console.log(emojiRoles);
+    //console.log(emojiRoles);
     const eachLine = content.split('\n');
     for (const line of eachLine) {
         if (line.includes('=')) {
@@ -49,6 +52,7 @@ const onMessage = async (message, old) => {
             let emoji = split[0].trim();
             const orig = emoji;
             emoji = emoji.replace(/^[a-zA-Z0-9\(\)\,\.\[\] ]*/, '');
+            //console.log('inside', emoji);
             if (customEmoji(emoji)) emoji = customEmoji(emoji).name;
 
             if (!emojiRoles[emoji]) {
@@ -95,7 +99,7 @@ const displaySampleMessage = (channel, client) => {
     }
 
     emojiText +=
-        '\nThis is a sample message to help you set up your `role claim channel`.\n*Please edit this message to finish setting up!*\n\n**This Message will auto delete in `60`s**';
+        '\nThis is a sample message to help you set up your `role claim channel`.\n*you can copy-paste this template if you want!*\n\n**This Message will auto delete in `60`s**';
     //setting the init_message in a 'particular' role-claim Channel
     channel.send(emojiText).then((message) => {
         setTimeout(() => {
@@ -110,6 +114,7 @@ const handleReacion = (reaction, user, add) => {
         return;
     }
 
+    if (!roleclaimCache[reaction.message.guild.id]) return;
     const [channelId, emojiRoles] = roleclaimCache[reaction.message.guild.id];
 
     if (channelId !== reaction.message.channel.id) {

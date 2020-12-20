@@ -47,7 +47,6 @@ module.exports = (client) => {
         const { guild, channel, content, member } = message;
         const cachedChannelId = suggestionsCache[guild.id];
         if (cachedChannelId && cachedChannelId === channel.id && !member.user.bot) {
-            message.delete();
             const status = statusMessages.WAITING;
 
             const embed = new MessageEmbed()
@@ -62,6 +61,8 @@ module.exports = (client) => {
                     message.react('👎');
                 });
             });
+
+            message.delete();
         }
     });
 };

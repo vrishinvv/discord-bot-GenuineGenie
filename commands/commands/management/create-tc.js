@@ -1,5 +1,5 @@
 module.exports = {
-    commands: ['setTC', 'set-tc'],
+    commands: ['createTC', 'create-tc'],
     expectedArgs: '<tc_name>',
     description: 'creates a text channel',
     minArgs: 1,

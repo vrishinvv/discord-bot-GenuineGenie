@@ -35,22 +35,18 @@ module.exports = {
         const roleName = arguments.join(' ');
 
         if (roleName === 'del') {
-            await mongo().then(async (mongoose) => {
-                try {
-                    const result = await roleclaimSchema.findOne({ guildId });
+            const result = await roleclaimSchema.findOne({ guildId });
 
-                    let assigns = JSON.parse(result.emojiRoles);
+            let assigns = JSON.parse(result.emojiRoles);
 
-                    delete assigns[emoji];
-                    await roleclaimSchema.findOneAndUpdate(
-                        { guildId },
-                        { guildId, channelId, emojiRoles: JSON.stringify(assigns) },
-                        {}
-                    );
-                    addToCache(guildId, channelId, assigns);
-                } finally {
-                }
-            });
+            delete assigns[emoji];
+            await roleclaimSchema.findOneAndUpdate(
+                { guildId },
+                { guildId, channelId, emojiRoles: JSON.stringify(assigns) },
+                {}
+            );
+            addToCache(guildId, channelId, assigns);
+
             message.reply('yup we have deleted that emoji');
             //console.log(roleclaimCache());
             return;
@@ -65,24 +61,19 @@ module.exports = {
         }
 
         //console.log();
-        await mongo().then(async (mongoose) => {
-            try {
-                const result = await roleclaimSchema.findOne({ guildId });
-                console.log(result);
-                console.log(JSON.parse(result.emojiRoles));
-                let assigns = JSON.parse(result.emojiRoles);
 
-                assigns[emoji] = roleName;
-                // console.log(assigns, guildId, channelId);
-                await roleclaimSchema.findOneAndUpdate(
-                    { guildId },
-                    { guildId, channelId, emojiRoles: JSON.stringify(assigns) },
-                    {}
-                );
-                addToCache(guildId, channelId, assigns);
-            } finally {
-            }
-        });
+        const result = await roleclaimSchema.findOne({ guildId });
+
+        let assigns = JSON.parse(result.emojiRoles);
+
+        assigns[emoji] = roleName;
+        // console.log(assigns, guildId, channelId);
+        await roleclaimSchema.findOneAndUpdate(
+            { guildId },
+            { guildId, channelId, emojiRoles: JSON.stringify(assigns) },
+            {}
+        );
+        addToCache(guildId, channelId, assigns);
 
         message.reply(`you have assigned ${orig} for \`${roleName}\``);
     },

@@ -7,6 +7,8 @@ const onJoin = async (member) => {
     const { guild } = member;
 
     // fetch from db
+    if (!welcomeCache[guild.id]) return;
+
     let [channelId, text] = welcomeCache[guild.id];
     if (!channelId) {
         return;

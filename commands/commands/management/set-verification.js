@@ -5,7 +5,8 @@ const { fetch } = require('@features/verification-channel/verification-channel')
 
 module.exports = {
     commands: ['setVerification', 'set-verification', 'set-ver'],
-    description: 'set a channel to a `verification channel`',
+    description:
+        'set a channel to a `verification channel`. This will set the previous message in the channel as the message to vefiy with. Please specifiy a role which is lower than the bots role in the server. A server can have only one verification channel.',
     expectedArgs: '<emoji> <role> <#channel_name>(opt)',
     permissionError: '',
     minArgs: 2,
@@ -23,17 +24,6 @@ module.exports = {
         let emoji = arguments[0];
         const roleName = arguments[1];
         const role = guild.roles.cache.find((role) => role.name === roleName);
-        const roleId = role.id;
-
-        //Custom emojis have this syntax { EmojiName: emojiCode }
-        if (emoji.includes(':')) {
-            const split = emoji.split(':');
-            const emojiName = split[1];
-            emoji = guild.emojis.cache.find((emoji) => {
-                return emoji.name === emojiName;
-            });
-        }
-
         if (!role) {
             message.reply('That role does not exist').then((message) => {
                 setTimeout(() => {
@@ -43,8 +33,21 @@ module.exports = {
             });
 
             // delete the message the user sent
-            message.delete();
+            message.delete().catch((err) => {
+                console.log('cannot delete server owners message', err);
+            }); // but if server owner sent this, then it becomes forbidden
             return;
+        }
+
+        const roleId = role.id;
+
+        //Custom emojis have this syntax { EmojiName: emojiCode }
+        if (emoji.includes(':')) {
+            const split = emoji.split(':');
+            const emojiName = split[1];
+            emoji = guild.emojis.cache.find((emoji) => {
+                return emoji.name === emojiName;
+            });
         }
 
         // deleting user's message, which is a command
@@ -59,14 +62,12 @@ module.exports = {
                     });
                 }
 
-                console.log('REACHED HERE');
                 // react to latest message with emoji
                 firstMessage.react(emoji);
 
                 // update to mongo db
                 await mongo().then(async (mongoose) => {
                     try {
-                        console.log('WRITING TO MONGO');
                         await verificationChannelsSchema
                             .findOneAndUpdate(
                                 { guildId: guild.id },

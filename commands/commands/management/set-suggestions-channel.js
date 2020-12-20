@@ -1,15 +1,15 @@
 const mongo = require('@root/database/mongo');
 const suggestionsSchema = require('@schemas/suggestions-schema');
-const { fetchSuggestionsChannel } = require('@features/suggestions/suggestions');
+const { fetchSuggestionsChannels } = require('@features/suggestions/suggestions');
 
 module.exports = {
-    commands: ['set-suggestions'],
+    commands: ['set-suggestions', 'setSuggestions'],
     expectedArgs: '<#channel_name>(opt)',
-    description: 'set the current channel into a suggestions channel',
+    description: 'set the current channel into a suggestions channel. A server can have only one sugestions channel.',
     maxArgs: 1,
     permissionError: '',
     callback: async (message, arguments, text, client) => {
-        console.log('im in');
+        //console.log('im in');
         const channel = message.mentions.channels.first() || message.channel;
         const {
             guild: { id: guildId },
@@ -37,7 +37,7 @@ module.exports = {
 
                 message.reply(`you have set ${channel} as the \`suggestions channel\`!`);
 
-                fetchSuggestionsChannel(guildId);
+                fetchSuggestionsChannels(guildId);
             } finally {
             }
         });

@@ -5,7 +5,8 @@ const { addToCache } = require('@features/mod-logs/mod-logs');
 
 module.exports = {
     commands: ['setModLogs', 'set-modlogs', 'set-mod-logs'],
-    description: 'sets a channel to be a `modlogs channel`',
+    description:
+        'sets a channel to be a `modlogs channel`. It is advised to use this command on a channel which is privy to the eyes of only the moderators',
     callback: async (message, arguments, text, client) => {
         const { member, channel, guild, content } = message;
 

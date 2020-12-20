@@ -109,7 +109,7 @@ module.exports = (client, commandOptions) => {
         });
 
         for (const alias of commands) {
-            if (content.toLowerCase().startsWith(`${prefix} ${alias.toLowerCase()}`)) {
+            if (content.toLowerCase().startsWith(`${prefix} ${alias.toLowerCase()} `)) {
                 // A command has to be run
 
                 // Ensure the user has the required permissions
@@ -219,10 +219,10 @@ module.exports.getPrefix = (client, guildId) => {
     if (guildPrefixes[guildId]) return guildPrefixes[guildId];
     else {
         loadPrefixes();
-        guildPrefixes[guildId];
+        return guildPrefixes[guildId];
     }
 };
 
-module.exports.updatePrefix = (guildID, newPrefix) => {
+module.exports.updatePrefix = (guildId, newPrefix) => {
     guildPrefixes[guildId] = newPrefix;
 };

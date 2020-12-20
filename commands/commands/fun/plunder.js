@@ -10,8 +10,8 @@ module.exports = {
     permissionError: '',
     minArgs: 1,
     maxArgs: 1,
-    /* cooldown: 5,
-    repeats: 3, */
+    cooldown: 45,
+    repeats: 1,
     callback: async (message, arguments, text) => {
         const target = message.mentions.users.first();
         if (!target) {
@@ -38,14 +38,14 @@ module.exports = {
         }
 
         const results = await plunderSchema.findOne({ userId: targetId });
-        console.log(results);
+        //console.log(results);
         if (results) {
             const then = new Date(results.updatedAt).getTime();
             const now = new Date().getTime();
 
             const diffTime = Math.abs(now - then);
             const diffMinutes = diffTime / (1000 * 60);
-            console.log(diffMinutes);
+            //console.log(diffMinutes);
             if (diffMinutes <= 2) {
                 message.reply(`this user was robbed within the last 2 mins! please give them some time to cry`);
                 return;

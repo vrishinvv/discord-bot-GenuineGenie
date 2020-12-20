@@ -1,4 +1,5 @@
 const thanksSchema = require('@schemas/thanks-schema');
+const thanksChannelSchema = require('@schemas/thanks-channel-schema');
 
 module.exports = {
     commands: ['thanks', 'thx', 'thenks', 'thank'],
@@ -62,7 +63,10 @@ module.exports = {
             { upsert: true, new: true }
         );
         const amount = result.received;
-        message.reply(`You have thanked <@${targetId}>, they now have \`${amount}\` thanks`);
+        const { channelId: channelId2 } = await thanksChannelSchema.findOne({ guildId });
+        message.reply(
+            `You have thanked <@${targetId}>, they now have \`${amount}\` thanks. Check out <#${channelId2}>`
+        );
     },
     permissions: [],
     requiredRoles: [],

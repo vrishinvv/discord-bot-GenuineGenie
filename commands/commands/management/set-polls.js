@@ -7,7 +7,7 @@ const { addToCache } = require('@features/advanced-polls/advanced-polls');
 module.exports = {
     commands: ['setPolls', 'set-polls'],
     expectedArgs: '<#channel_name>(opt)',
-    description: 'sets a channel to a `polls channel`',
+    description: 'sets a channel to a `polls channel. A server can have only one polls channel.`',
     maxArgs: 1,
     callback: async (message, arguments, text, client) => {
         const { member, guild, content } = message;

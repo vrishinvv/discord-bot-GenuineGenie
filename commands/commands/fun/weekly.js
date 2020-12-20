@@ -23,12 +23,12 @@ module.exports = {
         const { id } = member;
 
         if (claimedCache.includes(id)) {
-            console.log('returning from cache');
+            //console.log('returning from cache');
             message.reply(`you have already claimed your **weekly** rewards!`);
             return;
         }
 
-        console.log('Fetching from Mongo');
+        //console.log('Fetching from Mongo');
 
         const obj = {
             userId: id,

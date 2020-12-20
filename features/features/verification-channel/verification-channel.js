@@ -65,7 +65,7 @@ module.exports = (client) => {
         //console.log('im printing this: ', roleId, user);
         if (roleId) {
             const { guild } = reaction.message;
-            console.log(user);
+            //console.log(user);
             //guild member has more p   roperties than user object. though the ids are same
             const member = guild.members.cache.get(user.id);
             member.roles.add(roleId);

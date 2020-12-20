@@ -2,8 +2,15 @@ const mongo = require('@root/database/mongo');
 const thanksSchema = require('@schemas/thanks-schema');
 const thanksChannelSchema = require('@schemas/thanks-channel-schema');
 
-const fetchTopMembers = async (guildId, guild) => {
+const fetchTopMembers = async (guildId, guild, channel) => {
     const role = guild.roles.cache.find((role) => role.name === 'Helping Herald');
+    if (!role) {
+        channel.send("please create a role 'Helping Herald' first").then((message) => {
+            message.delete({ timeout: 1000 * 20 });
+        });
+        return;
+    }
+
     let text = 'Gratitude is a virtue! Appreciation is another 🥺\n*Here is recognition for our **TOP** helpers:*\n';
     text += `**Top 3** users will recieve the <@&${role.id}> role\n\n`;
     const results = await thanksSchema
@@ -30,7 +37,7 @@ const fetchTopMembers = async (guildId, guild) => {
         }
     }
 
-    text += `\nThis is updated every \`30\`mins...`;
+    text += `\nThis is updated every \`30\`mins...\nWe will try and reset the thanks count every month :)`;
     return text;
 };
 
@@ -46,7 +53,7 @@ const updateLeaderBoard = async (client) => {
                 const messages = await channel.messages.fetch();
                 const firstMessage = messages.first();
 
-                const text = await fetchTopMembers(guildId, guild);
+                const text = await fetchTopMembers(guildId, guild, channel);
 
                 if (firstMessage) {
                     firstMessage.edit(text);
@@ -64,15 +71,35 @@ const updateLeaderBoard = async (client) => {
 
 module.exports = async (client) => {
     updateLeaderBoard(client);
-    client.on('message', (message) => {
+    client.on('message', async (message) => {
         const { content, member, guild } = message;
         const getPrefix = require('@root/commands/command-base').getPrefix;
         const prefix = getPrefix(client, guild.id);
         if (content.toLowerCase().startsWith(prefix) || member.user.bot) return;
 
-        const res = content.match(/thank/g);
+        const authorData = await thanksSchema.findOne({
+            userId: message.author.id,
+            guildId: message.guild.id,
+        });
+
+        const now = new Date();
+        if (authorData && authorData.lastGave) {
+            const then = new Date(authorData.lastGave);
+            const diff = now.getTime() - then.getTime();
+
+            const diffHours = Math.round(diff / (1000 * 60 * 60));
+            const hours = 1;
+            if (diffHours < hours) {
+                //message.reply(`you have already thanked someone within the last \`${hours}hr(s)\``);
+                return;
+            }
+        }
+
+        const res = content.match(/t*h*[a|e]*n*k*s*/g);
         if (res) {
             message.channel.send(`**TIP** Want to thank someone? Use \`${prefix} thank <Their@>\``);
         }
     });
 };
+
+module.exports.updateLeaderBoard = updateLeaderBoard;

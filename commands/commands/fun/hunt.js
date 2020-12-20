@@ -5,8 +5,8 @@ const profileSchema = require('@schemas/profile-schema');
 module.exports = {
     commands: ['hunt'],
     description: 'hunts a random monster',
-    /* cooldown: 25,
-    repeats: 1, */
+    cooldown: 20,
+    repeats: 1,
     callback: async (message, arguments, text, client) => {
         const userName = message.author.username;
         const userId = message.author.id;
@@ -66,7 +66,7 @@ module.exports = {
             };
 
             const isEndGame = async (usr, opp) => {
-                console.log('in here', usr.hp, opp.hp);
+                c//onsole.log('in here', usr.hp, opp.hp);
                 if (opp.hp <= 0) {
                     message.reply(
                         `you **WON** the battle!\n${opp.emoji} \`${opp.name}\` [ **${status}** ], has been added to your inventory!`
