@@ -95,7 +95,7 @@ module.exports = async (client) => {
             }
         }
 
-        const res = content.match(/t*h*[a|e]*n*k*s*/g);
+        const res = content.match(/t.h.[a|e].n.k.s./g);
         if (res) {
             message.channel.send(`**TIP** Want to thank someone? Use \`${prefix} thank <Their@>\``);
         }

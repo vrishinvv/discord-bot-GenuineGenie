@@ -109,7 +109,10 @@ module.exports = (client, commandOptions) => {
         });
 
         for (const alias of commands) {
-            if (content.toLowerCase().startsWith(`${prefix} ${alias.toLowerCase()} `)) {
+            if (
+                content.toLowerCase().startsWith(`${prefix} ${alias.toLowerCase()} `) ||
+                content.toLowerCase() === `${prefix} ${alias.toLowerCase()}`
+            ) {
                 // A command has to be run
 
                 // Ensure the user has the required permissions
