@@ -4,7 +4,7 @@ const mongoURL = process.env.mongoURL;
 
 module.exports = async () => {
     await mongoose.connect(encodeURI(mongoURL), {
-        //keepAlive: true,
+        keepAlive: true,
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
