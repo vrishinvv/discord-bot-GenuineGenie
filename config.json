@@ -1,6 +1,3 @@
 {
-    "prefix": "hit",
-    "token": "Nzg2MjMwOTg3OTY0ODA5MjU3.X9DYqg.CQXYOg6cXGxTdlrfopghLWBtRMk",
-    "mongoURL": "mongodb+srv://drpg:LZfVn5JZorZVj4As@discord-bot.ynyjy.mongodb.net/test",
-    "redisURL": "//redis-18143.c232.us-east-1-2.ec2.cloud.redislabs.com:18143?password=8rAhMhZyLOsbe1oWVrC45Zikzkt76BJY"
+    "prefix": "hit"
 }
