@@ -1,6 +1,6 @@
 const redis = require('redis');
-const { redisURL } = require('@root/config.json');
-//const redisURL = process.env.redisURL;
+//const { redisURL } = require('@root/config.json');
+const redisURL = process.env.redisURL;
 // 8rAhMhZyLOsbe1oWVrC45Zikzkt76BJY
 // redis-18143.c232.us-east-1-2.ec2.cloud.redislabs.com:18143
 
