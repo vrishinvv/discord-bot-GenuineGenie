@@ -66,7 +66,7 @@ module.exports = {
             };
 
             const isEndGame = async (usr, opp) => {
-                c//onsole.log('in here', usr.hp, opp.hp);
+                //console.log('in here', usr.hp, opp.hp);
                 if (opp.hp <= 0) {
                     message.reply(
                         `you **WON** the battle!\n${opp.emoji} \`${opp.name}\` [ **${status}** ], has been added to your inventory!`

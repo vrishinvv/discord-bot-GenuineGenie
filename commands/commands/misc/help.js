@@ -58,6 +58,7 @@ module.exports = {
                 .setColor('RANDOM');
 
             message.channel.send(embed);
+            ok = 1;
         } else {
             const query = arguments[0].toLowerCase();
             //console.log(query);
