@@ -4,12 +4,12 @@ const { addToCache } = require('@features/welcome/welcome.js');
 
 module.exports = {
     commands: ['setWelcome', 'set-welcome'],
-    expectedArgs: '<channel<welcome_text>',
+    expectedArgs: '<channel> </channel><welcome_text>',
     description: 'sets a channel to a `welcome channel.  A server can have only one welcome channel.`',
     maxArgs: null,
     callback: async (message, arguments, text, client) => {
         const { member, guild, content } = message;
-        const channel = message.mentions.channels.last() || message.channel;
+        const channel = message.mentions.channels.first() || message.channel;
 
         if (message.mentions.channels.first()) {
             arguments.length = arguments.length - 1;
