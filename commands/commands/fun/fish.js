@@ -6,7 +6,7 @@ const profileSchema = require('@schemas/profile-schema');
 module.exports = {
     commands: ['fish'],
     description: 'fishes a random monster',
-    cooldown: 20,
+    cooldown: 100,
     repeats: 1,
     callback: async (message, arguments, text, client) => {
         const userName = message.author.username;

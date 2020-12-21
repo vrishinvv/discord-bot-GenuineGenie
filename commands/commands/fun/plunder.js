@@ -10,7 +10,7 @@ module.exports = {
     permissionError: '',
     minArgs: 1,
     maxArgs: 1,
-    cooldown: 45,
+    cooldown: 60,
     repeats: 1,
     callback: async (message, arguments, text) => {
         const target = message.mentions.users.first();

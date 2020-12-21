@@ -5,7 +5,7 @@ const profileSchema = require('@schemas/profile-schema');
 module.exports = {
     commands: ['hunt'],
     description: 'hunts a random monster',
-    cooldown: 20,
+    cooldown: 120,
     repeats: 1,
     callback: async (message, arguments, text, client) => {
         const userName = message.author.username;
@@ -39,8 +39,8 @@ module.exports = {
                 if (A.emoji) dat = `${A.emoji} ${A.name}`;
                 else dat = `you`;
 
-                A.def += 25;
-                message.reply(`\`${dat}\` defended and permenantly rose thier DEF by **25**`);
+                A.def += 40;
+                message.reply(`\`${dat}\` defended and permenantly rose thier DEF by **40**`);
             };
 
             const heal = (A, B) => {
@@ -48,7 +48,7 @@ module.exports = {
                 if (A.emoji) dat = `${A.emoji} ${A.name}`;
                 else dat = `you`;
 
-                const heal = Math.random() * (A.hp / 30) + 10;
+                const heal = Math.random() * (A.hp / 50) + 10;
                 A.hp += heal;
                 message.reply(`\`${dat}\` and recovered **${heal.toFixed(2)}** HP`);
             };

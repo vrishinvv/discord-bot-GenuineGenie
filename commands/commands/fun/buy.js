@@ -20,7 +20,7 @@ module.exports = {
 
         const temp = [];
         for (const [emoji, name, info, cost] of items) {
-            temp[name] = [cost, emoji];
+            temp[name.toLowerCase()] = [cost, emoji];
         }
 
         let item = arguments.join(' ');

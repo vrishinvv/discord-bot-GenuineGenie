@@ -21,6 +21,7 @@ module.exports = {
             message.reply('please enter a valid name');
             return;
         }
+
         item.toLowerCase();
 
         if (!inventory[item]) {
