@@ -41,7 +41,7 @@ module.exports = async (client) => {
         const channelId = modlogsCache[guild.id];
         if (hasRole && channelId) {
             const channel = guild.channels.cache.get(channelId);
-            channel.send(`\`<${member.user.tag}>\` in <#${message.channel.id}> sent,```\n${content}```\n`);
+            channel.send(`\`<${member.user.tag}>\` in <#${message.channel.id}> sent,\`\`\`\n${content}\`\`\`\n`);
         }
     });
 };
