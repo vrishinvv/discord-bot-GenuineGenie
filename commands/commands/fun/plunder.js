@@ -19,7 +19,7 @@ module.exports = {
             return;
         }
 
-        if (target === message.author.id) {
+        if (target.id === message.author.id) {
             message.reply('Funny you thought that will work xD');
             return;
         }
@@ -34,7 +34,7 @@ module.exports = {
         const resultTarget = await getUser(targetName, targetId);
         if (resultUser.coins < 400) {
             message.reply(`you need atleast *400* coins in your coin pouch, before you can plunder somoene else`);
-            return;
+            return 1;
         }
 
         const results = await plunderSchema.findOne({ userId: targetId });
@@ -48,15 +48,15 @@ module.exports = {
             //console.log(diffMinutes);
             if (diffMinutes <= 2) {
                 message.reply(`this user was robbed within the last 2 mins! please give them some time to cry`);
-                return;
+                return 1;
             }
         }
 
         const roll = Math.floor(Math.random() * 100);
         if (roll < 5) {
             const delta = resultTarget.coins;
-            message.reply(
-                `🤑 You evil little twig. You emptied <@${targetId}>'s wallet.\nyou plundered **${delta}** coins.`
+            message.channel.send(
+                `<@${userId}>, 🤑 You evil little twig. You emptied <@${targetId}>'s wallet.\nyou plundered **${delta}** coins.`
             );
             await updateCoins(userId, delta);
             await updateCoins(targetId, -delta);
@@ -67,8 +67,8 @@ module.exports = {
             );
         } else if (roll < 10) {
             const delta = Math.floor((Math.random() * resultTarget.coins * 75) / 100);
-            message.reply(
-                `💰 You almost stole everything from <@${targetId}>'s wallet. What a theif!\nyou plundered **${delta}** coins.`
+            message.channel.send(
+                `<@${userId}>, 💰 You almost stole everything from <@${targetId}>'s wallet. What a theif!\nyou plundered **${delta}** coins.`
             );
             await updateCoins(userId, delta);
             await updateCoins(targetId, -delta);
@@ -79,7 +79,9 @@ module.exports = {
             );
         } else if (roll < 20) {
             const delta = Math.floor((Math.random() * resultTarget.coins * 33) / 100);
-            message.reply(`💵 you plundered **${delta}** coins from <@${targetId}>'s wallet. oof. `);
+            message.channel.send(
+                `<@${userId}>, 💵 you plundered **${delta}** coins from <@${targetId}>'s wallet. oof. `
+            );
             await updateCoins(userId, delta);
             await updateCoins(targetId, -delta);
             await plunderSchema.findOneAndUpdate(
@@ -89,7 +91,7 @@ module.exports = {
             );
         } else if (roll < 40) {
             const delta = Math.floor((Math.random() * resultTarget.coins * 20) / 100);
-            message.reply(`you plundered **${delta}** coins from your target. not bad. `);
+            message.channel.send(`<@${userId}>, you plundered **${delta}** coins from your target. not bad. `);
             await updateCoins(userId, delta);
             await updateCoins(targetId, -delta);
             await plunderSchema.findOneAndUpdate(

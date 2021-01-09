@@ -29,7 +29,7 @@ module.exports = {
                 if (A.emoji) (dat = `${A.emoji} ${A.name}`), (dis = `you`);
                 else (dis = `${B.emoji} ${B.name}`), (dat = `you`);
 
-                const damage_dealt = A.atk - (A.atk * B.def) / 1000 + Math.random() * 5 - Math.random() * 2;
+                const damage_dealt = A.atk - B.def / 1000 * A.atk + Math.random() * 5 - Math.random() * 2;
                 B.hp -= damage_dealt;
                 message.reply(`\`${dat}\` attacked \`${dis}\` and dealt **${damage_dealt.toFixed(2)}** true damage`);
             };

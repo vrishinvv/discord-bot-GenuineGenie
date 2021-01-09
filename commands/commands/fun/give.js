@@ -17,7 +17,7 @@ module.exports = {
             return;
         }
 
-        if (target === message.author.id) {
+        if (target.id === message.author.id) {
             message.reply('Funny you thought that will work xD');
             return;
         }
@@ -44,10 +44,11 @@ module.exports = {
             return;
         }
 
+        console.log(target);
         if (arguments[0] === 'max') {
             await updateCoins(userId, -available);
             await updateCoins(targetId, +available);
-            message.reply(`What a samaritan! you gave **${available}** :coin: to <@${targetId}>.`);
+            message.channel.send(`<@${userId}>, What a samaritan! you gave **${available}** :coin: to <@${targetId}>.`);
         } else {
             let delta = +arguments[0];
             if (delta < 0) {
@@ -57,11 +58,10 @@ module.exports = {
             } else {
                 await updateCoins(userId, -delta);
                 await updateCoins(targetId, +delta);
-                message.reply(`What a samaritan! you gave **${delta}** :coin: to <@${targetId}>.`);
+                message.channel.send(`<@${userId}>, What a samaritan! you gave **${delta}** :coin: to <@${targetId}>.`);
             }
         }
     },
     permissions: [],
     requiredRoles: [],
 };
-

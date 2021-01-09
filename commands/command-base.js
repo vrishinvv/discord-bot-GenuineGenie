@@ -125,6 +125,7 @@ module.exports = (client, commandOptions) => {
                 }
 
                 if (typeof requiredRoles === 'string') requiredRoles = [requiredRoles];
+
                 // Enusre the user has the required roles
                 for (const requiredRole of requiredRoles) {
                     const role = guild.roles.cache.find((role) => role.name === requiredRole);
@@ -140,7 +141,7 @@ module.exports = (client, commandOptions) => {
                 if (cooldown > 0 && recently.has(cooldownString)) {
                     const parsedArray = recently.get(cooldownString).split(' ');
                     const [currentrepeats, oldTime] = parsedArray;
-                    console.log(currentrepeats, oldTime);
+
                     if (currentrepeats <= 0) {
                         const timeElapsed = getTimespan(currentDate.getTime(), Number(oldTime));
                         const waitingTime = cooldown - timeElapsed;
@@ -162,7 +163,14 @@ module.exports = (client, commandOptions) => {
                     return;
                 }
 
-                if (cooldown > 0) {
+                // Handle the custom command code
+                const retVal = await callback(message, arguments, arguments.join(' '), client);
+
+                // commands issued ++
+                await updateXP(message.author.id, Math.floor(Math.random() * 50) + 50, message);
+
+                // Handle Cooldowns
+                if (cooldown > 0 && retVal !== 1) {
                     if (recently.has(cooldownString)) {
                         const parsedArray = recently.get(cooldownString).split(' ');
                         const [currentrepeats, ...others] = parsedArray;
@@ -184,12 +192,6 @@ module.exports = (client, commandOptions) => {
                         }
                     }
                 }
-
-                // Handle the custom command code
-                callback(message, arguments, arguments.join(' '), client);
-
-                // commands issued ++
-                await updateXP(message.author.id, Math.floor(Math.random() * 50) + 50, message);
 
                 return;
             }
