@@ -97,7 +97,11 @@ module.exports = async (client) => {
 
         const res = content.match(/th[a|e]*nks/g);
         if (res) {
-            message.channel.send(`**TIP** Want to thank someone? Use \`${prefix} thank <Their@>\``);
+            message.channel.send(`**TIP** Want to thank someone? Use \`${prefix} thank <Their@>\``).then((message) => {
+                setTimeout(() => {
+                    message.delete();
+                }, 5 * 1000);
+            });
         }
     });
 };

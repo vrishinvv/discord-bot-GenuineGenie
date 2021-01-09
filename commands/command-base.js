@@ -97,7 +97,7 @@ module.exports = (client, commandOptions) => {
     }
 
     client.on('message', async (message) => {
-        const { member, content, guild } = message;
+        let { member, content, guild } = message;
         const prefix = guildPrefixes[guild.id] || globalPrefix;
         givePrefix = prefix;
         const currentDate = new Date();
@@ -111,7 +111,9 @@ module.exports = (client, commandOptions) => {
         for (const alias of commands) {
             if (
                 content.toLowerCase().startsWith(`${prefix} ${alias.toLowerCase()} `) ||
-                content.toLowerCase() === `${prefix} ${alias.toLowerCase()}`
+                content.toLowerCase() === `${prefix} ${alias.toLowerCase()}` ||
+                content.toLowerCase().startsWith(`${prefix}${alias.toLowerCase()} `) ||
+                content.toLowerCase() === `${prefix}${alias.toLowerCase()}`
             ) {
                 // A command has to be run
 
@@ -149,6 +151,16 @@ module.exports = (client, commandOptions) => {
                         message.reply(`You can use this command in \`${+waitingTime.toFixed(2)} secs\`. Please wait!`);
                         return;
                     }
+                }
+
+                if (
+                    content.toLowerCase().startsWith(`${prefix}${alias.toLowerCase()} `) ||
+                    content.toLowerCase() === `${prefix}${alias.toLowerCase()}`
+                ) {
+                    const temp = content.toLowerCase().split(prefix.toLowerCase());
+                    content = prefix.toLowerCase() + ' ' + temp[1];
+                    console.log(temp);
+                    console.log(content);
                 }
 
                 // Split on any number of spaces

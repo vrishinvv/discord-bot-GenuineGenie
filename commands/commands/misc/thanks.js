@@ -64,8 +64,8 @@ module.exports = {
         );
         const amount = result.received;
         const { channelId: channelId2 } = await thanksChannelSchema.findOne({ guildId });
-        message.reply(
-            `You have thanked <@${targetId}>, they now have \`${amount}\` thanks. Check out <#${channelId2}>`
+        message.channel.send(
+            `<@${authorId}>, You have thanked <@${targetId}>, they now have \`${amount}\` thanks. Check out <#${channelId2}>`
         );
     },
     permissions: [],

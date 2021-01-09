@@ -74,7 +74,7 @@ module.exports = {
             message.reply(res.description);
         }
 
-        if (0 <= break_item && break_item < 200) {
+        if (0 <= break_item && break_item < 600) {
             if (inventory['hunting bow']) {
                 inventory['hunting bow'].count--;
                 result.items = JSON.stringify(inventory);

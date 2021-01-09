@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-//const { mongoURL } = require('@root/config.json');
-const mongoURL = process.env.mongoURL;
+const { mongoURL } = require('@root/config.json');
+//const mongoURL = process.env.mongoURL;
 
 module.exports = async () => {
     await mongoose.connect(encodeURI(mongoURL), {
