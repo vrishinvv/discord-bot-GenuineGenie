@@ -1,6 +1,6 @@
 # discord-bot-GenuineGenie
 
-A bot that can do everything? Yes you read that right, this is as advanced community server _setup/management/moderation/handling_ discord-bot with about **50+ commands** and **10+ features**!!
+A bot that can do everything? Yes you read that right, this is an advanced community server _setup/management/moderation/handling_ discord-bot with about **50+ commands** and **10+ features**!!
 
 Invite the bot by clicking on this URL right now, and see it in action yourself, [click here](https://discord.com/api/oauth2/authorize?client_id=786230987964809257&permissions=8&scope=bot)
 
